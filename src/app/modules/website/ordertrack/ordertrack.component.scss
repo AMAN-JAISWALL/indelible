@@ -1,0 +1,67 @@
+/* Progressbar container */
+ul.progressbar {
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+
+ul.progressbar::before {
+    content: "";
+    position: absolute;
+    top: 24%;
+    left: 0%;
+    width: 100%;
+    height: 4px;
+    background-color: #d3d3d3;
+    z-index: 1;
+}
+
+ul.progressbar li {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+ul.progressbar li .step-icon {
+    width: 40px;
+    height: 40px;
+    background-color: #d3d3d3;
+    border-radius: 50%;
+    line-height: 40px;
+    font-size: 18px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+ul.progressbar li.active .step-icon {
+    background-color: #283D53;
+}
+
+ul.progressbar li.active + li .step-icon {
+    background-color: #d3d3d3;
+}
+
+ul.progressbar li p {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* Line coloring for active steps */
+ul.progressbar li.active::after {
+    content: "";
+    position: absolute;
+    top: 24%;
+    left: 1%;
+    width: 100%;
+    height: 4px;
+    background-color: #283D53;
+    z-index: -1;
+}
+
+

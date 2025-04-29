@@ -1,0 +1,22 @@
+stages:
+  - build
+  - clean
+
+ci_job:
+  stage: build
+  tags:
+    - ci
+  only:
+    - main
+  script:
+    - echo "process start - $(date +%Y-%m-%d_%H-%M-%S)"
+    - echo "process end - $(date +%Y-%m-%d_%H-%M-%S)"
+
+space_clean:
+  stage: clean
+  tags:
+    - ci
+  only:
+    - main
+  script:
+    - echo "Cleaning space"

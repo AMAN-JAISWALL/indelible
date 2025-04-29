@@ -1,0 +1,1348 @@
+<div class="container-fluid py-3 px-md-5 px-2">
+  <div class="d-flex justify-content-between align-items-center m-b-10">
+    <h5>Reservation List</h5>
+    <div>
+      <!-- <button class="btn btn-primary me-3" [routerLink]="['/website/reservation/addreservation']">
+        <i class="feather icon-plus"></i>
+        Add Reservation
+      </button> -->
+      <button class="btn btn-primary" (click)="openVerticallyCenteredSec(newaccount)">
+        <i class="feather icon-plus"></i>
+        Add Reservation
+      </button>
+    </div>
+  </div>
+  <div class="card filter-card mb-2">
+    <div class="card-body card-body py-2 px-3">
+      <div class="filter-container">
+        <div class="row">
+          <div class="col-sm-6 col-lg-2">
+            <div class="form-group mb-md-0">
+              <label for="time-period">Port</label>
+              <select id="time-period" class="form-control ng-untouched ng-pristine ng-valid" [(ngModel)]="selectedPort"
+                (change)="listPortChange()">
+                <option [ngValue]="null">Select Port</option>
+                <option *ngFor="let data of getAllPortsData" [value]="data.portid">{{ data.portcode }}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-2">
+            <div class="form-group mb-md-0">
+              <label for="date">Date</label>
+              <input type="date" id="date" class="form-control" [(ngModel)]="selectedDate"
+                (change)="listDateChange()" />
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-2">
+            <div class="form-group mb-md-0">
+              <label for="hotel">Hotel</label>
+              <select id="hotel" class="form-control" [(ngModel)]="selectedHotel" (change)="listHotelChange()">
+                <option [ngValue]="null">Select Hotel</option>
+                <option *ngFor="let data of getHotelsData" [value]="data.hotel_id">{{ data.hotel_name }}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-2">
+            <div class="form-group mb-md-0">
+              <label for="airline">Airline</label>
+              <select id="airline" class="form-control ng-untouched ng-pristine ng-valid" [(ngModel)]="selectedAirline"
+                (change)="listAirlineChange()">
+                <option [ngValue]="null">Select Airline</option>
+                <option *ngFor="let data of getAllAirlinesData" [value]="data.airlineid">{{ data.airlinename }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-2">
+            <div class="form-group mb-md-0">
+              <label for="reservation-number">Reservation Number</label>
+              <input type="text" id="reservation-number" class="form-control" placeholder="Enter reservation number"
+                [(ngModel)]="selectedReservationNumber" (input)="listReservationNumberChange($event)" />
+            </div>
+          </div>
+          <div class="col-md-auto d-flex align-items-end gap-2">
+            <button class="btn btn-primary" (click)="handleListFilters()"><i class="fa fa-check"></i></button>
+            <button class="btn btn-primary" (click)="handleListFiltersReset()"><i
+                class="feather icon-refresh-ccw"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex flex-sm-row flex-column justify-content-between align-items-center mb-2">
+            <div class="d-flex justify-content-center align-items-center">
+              <p class="mb-0">Show</p>
+              <select class="form-control wid-80 mx-2" (change)="onLimitChange($event)">
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select>
+              <p class="mb-0">entries</p>
+            </div>
+            <!-- <div class="w-25 mobile mt-2 mt-md-0">
+              <input type="text" placeholder="filter by Reservation Number" class="form-control" />
+            </div> -->
+          </div>
+          <div class="table-responsive">
+            <table class="table white-space">
+              <thead>
+                <tr>
+                  <th scope="col">Reservation No</th>
+                  <th scope="col">Port</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Check In</th>
+                  <th scope="col">Check Out</th>
+                  <th scope="col">Hotel</th>
+                  <th scope="col">Passenger Name</th>
+                  <th scope="col">Rooms</th>
+                  <th scope="col">Pax</th>
+                  <th scope="col">Nights</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngIf="isShimmer; else userTable">
+                  <tr *ngFor="let i of [1, 2, 3,]">
+                    <th>
+                      <div class="shimmer-loader" [ngStyle]="{width: '120px', height: '20px'}"></div>
+                    </th>
+                    <td>
+                      <div class="shimmer-loader" [ngStyle]="{width: '180px', height: '20px'}"></div>
+                    </td>
+                    <td>
+                      <div class="shimmer-loader" [ngStyle]="{width: '150px', height: '20px'}"></div>
+                    </td>
+                    <td>
+                      <div class="shimmer-loader" [ngStyle]="{width: '200px', height: '20px'}"></div>
+                    </td>
+                    <td>
+                      <div class="shimmer-loader" [ngStyle]="{width: '100px', height: '20px'}"></div>
+                    </td>
+                    <td>
+                      <div class="shimmer-loader" [ngStyle]="{width: '150px', height: '20px'}"></div>
+                    </td>
+                    <td>
+                      <div class="shimmer-loader" [ngStyle]="{width: '150px', height: '20px'}"></div>
+                    </td>
+                    <td>
+                      <div class="shimmer-loader" [ngStyle]="{width: '150px', height: '20px'}"></div>
+                    </td>
+                    <td>
+                      <div class="shimmer-loader" [ngStyle]="{width: '150px', height: '20px'}"></div>
+                    </td>
+                    <td>
+                      <div class="shimmer-loader" [ngStyle]="{width: '150px', height: '20px'}"></div>
+                    </td>
+                    <td>
+                      <div class="shimmer-loader" [ngStyle]="{width: '150px', height: '20px'}"></div>
+                    </td>
+                  </tr>
+                </ng-container>
+                <ng-template #userTable>
+                  <ng-container *ngIf="getAllReservationData.length > 0; else noData">
+                    <tr *ngFor="let data of getAllReservationData">
+                      <th scope="row">{{data.reservation_no || "N/A"}}</th>
+                      <td>{{data.portcode || "N/A"}}</td>
+
+                      <td>
+                        <span class="badge" *ngIf="data.reservation_status != 'Billing' " [ngClass]="{
+                          'badge-primary': data.reservation_status == 'Finalize',
+                          'badge-success': data.reservation_status == 'Open',
+                          'badge-danger': data.reservation_status == 'Cancel',
+                          'badge-secondary': data.reservation_status == 'Draft'}">{{data.reservation_status || "N/A"}}
+                        </span>
+                        <span class="custom-badge"
+                          *ngIf="data.reservation_status == 'Billing' ">{{data.reservation_status || "N/A"}}
+                        </span>
+                      </td>
+
+                      <td>{{data.check_in_date ? (data.check_in_date | date: 'dd-MM-yyyy') : "N/A"}}</td>
+                      <td>{{data.check_out_date ? (data.check_out_date | date: 'dd-MM-yyyy') : "N/A"}}</td>
+                      <td>{{data.hotel_name || "N/A"}}</td>
+                      <td>{{data.PName || "N/A"}}</td>
+                      <td>{{data.tot_rooms || "N/A"}}</td>
+                      <td>{{data.tot_pax || "N/A"}}</td>
+                      <td>{{data.nights || "N/A"}}</td>
+                      <td>
+                        <div ngbDropdown container="body">
+                          <button type="button" class="btn btn-sm border-0 text-dark" ngbDropdownToggle>
+                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                          </button>
+                          <div ngbDropdownMenu>
+                            <button *ngIf="data.reservation_status != 'Billing' && data.reservation_status != 'Cancel'"
+                              ngbDropdownItem (click)="handleEditReservation(newaccount,data)">
+                              <i class="feather icon-edit"></i>
+                              Edit
+                            </button>
+                            <button ngbDropdownItem (click)="openReservationNotesEdit(reservation_notes,data)">
+                              <i class="feather icon-file-text"></i>
+                              Notes
+                            </button>
+                            <button ngbDropdownItem *ngIf="data.reservation_status != 'Cancel'"
+                              (click)="makeACopy(conformationBox,data,'Copy')">
+                              <i class="feather icon-copy"></i>
+                              Make a copy
+                            </button>
+                            <!-- <button ngbDropdownItem (click)="editDownloadPdf(data); $event.stopPropagation();">
+                              <i class="feather icon-upload"></i>
+                              Upload Hotel Invoice
+                            </button> -->
+                            <button ngbDropdownItem *ngIf="data.reservation_status != 'Cancel'"
+                              (click)="handleOderFileUpload(invoiceFileUploadBox,data)">
+                              <i class="feather icon-upload"></i>
+                              Upload Hotel Invoice
+                            </button>
+
+                            <button ngbDropdownItem (click)="actionDownloadPdf(conformationBox,data,'Download PDF')">
+                              <i class="feather icon-download"></i>
+                              Download Pdf
+                            </button>
+
+                            <button *ngIf="data.reservation_status != 'Cancel' && data.reservation_status != 'Billing'"
+                              ngbDropdownItem (click)="actionCancel(conformationBox,data,'Cancel')">
+                              <i class="feather icon-x-circle"></i>
+                              Cancel
+                            </button>
+
+                            <button *ngIf="data.reservation_status == 'Finalize'"
+                              ngbDropdownItem (click)="actionCancel(conformationBox,data,'Reopen')">
+                              <i class="feather icon-refresh-ccw"></i>
+                              Reopen
+                            </button>
+
+                            <button *ngIf="localData.roleid == 1 && data.reservation_status == 'Finalize' "
+                              ngbDropdownItem (click)="actionReadyToBill(conformationBox,data,'Ready to bill')">
+                              <i class="feather icon-check-circle"></i>
+                              Ready to bill
+                            </button>
+
+                      
+                            <!-- <button ngbDropdownItem (click)="jsPDFLibrary()">
+                              <i class="feather icon-x-circle"></i>
+                              jsPDF
+                            </button> -->
+
+                            <!-- <button ngbDropdownItem (click)="actionCancel(data)">
+                              <i class="feather icon-x-circle"></i>
+                              Cancel
+                            </button> -->
+
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-container>
+                  <!-- No data row -->
+                  <ng-template #noData>
+                    <tr>
+                      <td colspan="11" class="text-center text-danger">Data not found.</td>
+                    </tr>
+                  </ng-template>
+                </ng-template>
+
+              </tbody>
+            </table>
+          </div>
+          <!-- <div class="d-flex flex-sm-row flex-column justify-content-between align-items-center mt-1">
+            <p class="mb-2 mt-1 mb-md-0 mt-md-0">Showing 1 to 10 of 57 entries</p>
+            <nav aria-label="Page navigation example">
+              <ul class="pagination mb-0">
+                <li class="page-item">
+                  <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                </li>
+                <li class="page-item"><a class="page-link active" href="javascript:void(0)">1</a></li>
+                <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
+                <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div> -->
+
+          <div class="d-flex flex-sm-row flex-column justify-content-between align-items-center mt-2">
+            <p class="mb-2 mt-1 mb-md-0 mt-md-0">Showing 1 to {{limit_user_list || ''}} of {{totalRecords || ''}}
+              entries</p>
+            <nav aria-label="Page navigation example">
+              <ul class="pagination mb-0">
+                <li class="page-item cursor-pointer" *ngIf="currentPage > 1">
+                  <a class="page-link" (click)="goToPreviousPage()">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                <li class="page-item cursor-pointer" *ngFor="let page of pages" [class.active]="currentPage === page">
+                  <a class="page-link" (click)="goToPage(page)">{{ page }}</a>
+                </li>
+                <li class="page-item cursor-pointer" *ngIf="currentPage < totalPages">
+                  <a class="page-link" (click)="goToNextPage()">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #newaccount let-modal>
+  <div class="modal-header pt-3 pb-3">
+    <h5 class="modal-title">{{addEditReservationHeading}} Reservation</h5>
+    <button type="button" class="btn-close border-0" aria-label="Close"
+      (click)="modal.dismiss('Cross click');resetAddReservationAllForms();"></button>
+  </div>
+  <div class="modal-body">
+    <!-- (click)="resetAddReservationAllForms()" -->
+    <div>
+      <!-- heading steps  -->
+      <div class="steps d-flex justify-content-between mb-2">
+        <div *ngFor="let step of steps; let i = index" class="step text-center" [class.active]="currentStep === i">
+          <div class="circle cursor-pointer" (click)="nextStep(i)">{{ i + 1 }}</div>
+          <p class="my-1">{{ step }}</p>
+        </div>
+      </div>
+
+      <div class="step-content">
+        <!-- Flight details -->
+        <div *ngIf="currentStep === 0">
+          <div class="h-responsive px-6rem">
+            <div class="row mt-4" [formGroup]="flightDetailsForm">
+              <div class="col-md-12">
+                <div class="form-group focused">
+                  <label class="form-control-label" for="agent-name">Agent's Name<small
+                      class="text-danger">*</small></label>
+                  <input type="text" id="agent-name" class="form-control" placeholder="Enter agent's name"
+                    formControlName="agentName" />
+                  <div class="text-danger">
+                    <small
+                      *ngIf="flightDetailsForm.controls['agentName'].touched && flightDetailsForm.controls['agentName'].errors?.['required']">
+                      Agent's name is required.
+                    </small>
+                    <small *ngIf="flightDetailsForm.controls['agentName'].errors?.['pattern']">
+                      Agent's name can only contain alphabetic characters.
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group focused">
+                  <label class="form-control-label" for="requesting-port">Requesting Port<small
+                      class="text-danger">*</small></label>
+                  <!-- <input type="text" id="requesting-port" class="form-control" placeholder="Enter port name"
+                    formControlName="requestingPort" /> -->
+                  <select id="time-period" class="form-control ng-untouched ng-pristine ng-valid"
+                    formControlName="requestingPort" (change)="getHotelsByPort()">
+                    <option [ngValue]="null">Select Port</option>
+                    <option *ngFor="let data of getAllPortsData" [value]="data.portid">{{ data.portcode }}</option>
+                  </select>
+
+                  <div class="text-danger">
+                    <small
+                      *ngIf="flightDetailsForm.controls['requestingPort'].touched && flightDetailsForm.controls['requestingPort'].errors?.['required']">
+                      Requesting port is required.
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group focused">
+                  <label class="form-control-label" for="request-received">Request Received<small
+                      class="text-danger">*</small></label>
+                  <input type="datetime-local" id="request-received" class="form-control"
+                    placeholder="Enter request received date" formControlName="requestReceived" />
+                  <div class="text-danger">
+                    <small
+                      *ngIf="flightDetailsForm.controls['requestReceived'].touched && flightDetailsForm.controls['requestReceived'].errors?.['required']">
+                      Request received is required.
+                    </small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group focused">
+                  <label class="form-control-label" for="requesting-airline">Requesting Airline<small
+                      class="text-danger">*</small></label>
+                  <!-- <input type="text" id="requesting-airline" class="form-control" placeholder="Enter airline name"
+                    formControlName="requestingAirline" /> -->
+                  <select id="airline" class="form-control " formControlName="requestingAirline">
+                    <option [ngValue]="null">Select Airline</option>
+                    <option *ngFor="let data of getAllAirlinesData" [value]="data.airlineid">{{ data.airlinename }}
+                    </option>
+                  </select>
+
+                  <div class="text-danger">
+                    <small
+                      *ngIf="flightDetailsForm.controls['requestingAirline'].touched && flightDetailsForm.controls['requestingAirline'].errors?.['required']">
+                      Requesting airline is required.
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group focused">
+                  <label class="form-control-label" for="flight-number">Flight Number<small
+                      class="text-danger">*</small></label>
+                  <input type="text" id="flight-number" class="form-control" placeholder="Enter flight number"
+                    formControlName="flightNumber" />
+                  <div class="text-danger">
+                    <small
+                      *ngIf="flightDetailsForm.controls['flightNumber'].touched && flightDetailsForm.controls['flightNumber'].errors?.['required']">
+                      Flight number is required.
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group focused">
+                  <label class="form-control-label" for="flight-date">Disruption Date<small
+                      class="text-danger">*</small></label>
+                  <input type="date" id="Disruption-date" class="form-control" formControlName="disruptionDate" />
+                  <div class="text-danger">
+                    <small
+                      *ngIf="flightDetailsForm.controls['disruptionDate'].touched && flightDetailsForm.controls['disruptionDate'].errors?.['required']">
+                      Disruption date is required.
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-end gap-2 mt-2">
+            <button class="btn btn-primary" (click)="nextStep(1)">
+              Next
+              <i class="feather icon-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+        <!-- Hotel Selection -->
+        <div *ngIf="currentStep === 1">
+          <div class="h-responsive px-6rem" [formGroup]="hotelSelectionForm">
+            <div class="row mt-4">
+              <div class="col-md-12">
+                <div class="form-group focused">
+                  <label class="form-control-label" for="check-in-date">Check-In Date<small
+                      class="text-danger">*</small></label>
+                  <input type="datetime-local" id="check-in-date" class="form-control" formControlName="checkInDate" />
+                  <div class="text-danger"><small
+                      *ngIf="hotelSelectionForm.controls['checkInDate'].touched && hotelSelectionForm.controls['checkInDate'].errors?.['required']">Check-In
+                      Date is required.</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group focused">
+                  <label class="form-control-label" for="check-out-date">Check-Out Date<small
+                      class="text-danger">*</small></label>
+                  <input type="datetime-local" id="check-out-date" class="form-control"
+                    formControlName="checkOutDate" />
+                  <div class="text-danger">
+                    <small
+                      *ngIf="hotelSelectionForm.controls['checkOutDate'].touched && hotelSelectionForm.controls['checkOutDate'].errors?.['required']">Check-In
+                      Date is required.
+                    </small>
+                    <small *ngIf="hotelSelectionForm.errors?.['dateMismatch'] && hotelSelectionForm.touched">
+                      Check-In Date cannot be later than Check-Out Date.
+                    </small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="hotel">Hotel<small class="text-danger">*</small></label>
+                  <select id="hotel" class="form-control ng-pristine ng-valid ng-touched" formControlName="hotel"
+                    (change)="gettingHotelDataOnChange($event)">
+                    <option [ngValue]="null">Select Hotel</option>
+                    <option *ngFor="let data of getHotelsDataByPort" [value]="data.hotel_id">{{ data.hotel_name }}
+                    </option>
+                  </select>
+                  <div class="text-danger">
+                    <small
+                      *ngIf="hotelSelectionForm.controls['hotel'].touched && hotelSelectionForm.controls['hotel'].errors?.['required']">Hotel
+                      is required.
+                    </small>
+                  </div>
+                </div>
+              </div>
+
+              <!-- <div class="col-md-4">
+                <div class="form-group focused">
+                  <label class="form-control-label" for="hotels">Hotels</label>
+                  <button (click)="openSelectHotelSec(selectHotel)" class="btn btn-primary w-100">
+                    <i class="feather icon-plus"></i>
+                    Select Hotels
+                  </button>
+                </div>
+              </div> -->
+
+              <!-- <div class="col-md-12">
+                <div class="form-group focused">
+                  <label class="form-control-label" for="room-type">Comission %<small class="text-danger">*</small>
+                    
+                  </label>
+                  <div class="d-flex align-items-center">
+                    <input type="text" id="room-type" class="form-control" placeholder="Enter Comission"
+                      formControlName="commission" />
+                    <div class="text-danger">
+                      <small
+                        *ngIf="hotelSelectionForm.controls['commission'].touched && hotelSelectionForm.controls['commission'].errors?.['required']">
+                        Comission is required.
+                      </small>
+                    </div>
+
+                  </div>
+                </div>
+              </div> -->
+
+              <div class="col-md-12">
+                <div class="form-group focused">
+                  <label class="form-control-label" for="room-type">Comission %<small class="text-danger">*</small>
+                  </label>
+                  <input type="text" id="room-type" class="form-control" placeholder="Enter Comission"
+                    formControlName="commission" [ngModel]="commissionValue" (input)="appendPercentage($event)" />
+                  <div class="text-danger">
+                    <small
+                      *ngIf="hotelSelectionForm.controls['commission'].touched && hotelSelectionForm.controls['commission'].errors?.['required']">
+                      Comission is required.
+                    </small>
+                    <small *ngIf="hotelSelectionForm.controls['commission'].errors?.['pattern']">
+                      Only numbers followed by '%' are allowed.
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-end gap-2 mt-2">
+            <button class="btn btn-secondary" (click)="prevStep()">
+              <i class="feather icon-arrow-left"></i>
+              Back
+            </button>
+            <button class="btn btn-primary" (click)="nextStep(2)">
+              Next
+              <i class="feather icon-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+        <!-- Passenger Details and Allowances -->
+        <!-- <div *ngIf="currentStep === 2">
+          <div class="h-responsive px-6rem" [formGroup]="passengerDetailsAndAllowances">
+            <div class="row border pt-2 mt-4">
+              <div class="col-sm-3 col-md-1">
+                <div class="form-group focused">
+                  <label class="form-control-label" for="rate">Rate</label>
+                  <input type="number" id="rate" class="form-control" placeholder="Enter rate" formControlName="rate" />
+                  <div class="text-danger">
+                    <small
+                      *ngIf="passengerDetailsAndAllowances.controls['rate'].touched && passengerDetailsAndAllowances.controls['rate'].errors?.['required']">Rate
+                      is required.
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 col-md-1 px-2">
+                <div class="form-group focused">
+                  <label class="form-control-label" for="room">Room</label>
+                  <input type="number" id="room" class="form-control" placeholder="Enter room" formControlName="room" />
+                  <div class="text-danger">
+                    <small
+                      *ngIf="passengerDetailsAndAllowances.controls['room'].touched && passengerDetailsAndAllowances.controls['room'].errors?.['required']">Room
+                      is required.
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 col-md-1 px-2">
+                <div class="form-group focused">
+                  <label class="form-control-label" for="pax">Pax</label>
+                  <input type="number" id="pax" class="form-control" placeholder="Enter pax" formControlName="pax" />
+                  <div class="text-danger">
+                    <small
+                      *ngIf="passengerDetailsAndAllowances.controls['pax'].touched && passengerDetailsAndAllowances.controls['pax'].errors?.['required']">Pax
+                      is required.
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 col-md-4 px-2">
+                <div class="form-group focused">
+                  <label class="form-control-label" for="name">Name</label>
+
+                  <input type="text" id="name" class="form-control" placeholder="Enter name" formControlName="name" />
+                  <div class="text-danger">
+                    <small
+                      *ngIf="passengerDetailsAndAllowances.controls['name'].touched && passengerDetailsAndAllowances.controls['name'].errors?.['required']">Name
+                      is required.
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 col-md-1 px-2">
+                <div class="form-group focused">
+                  <label class="form-control-label" for="breakfast">Breakfast</label>
+                  <input type="number" id="breakfast" class="form-control" placeholder="Enter breakfast"
+                    formControlName="breakfast" />
+                </div>
+              </div>
+              <div class="col-sm-3 col-md-1 px-2">
+                <div class="form-group focused">
+                  <label class="form-control-label" for="dinner">Dinner</label>
+                  <input type="number" id="dinner" class="form-control" placeholder="Enter dinner"
+                    formControlName="dinner" />
+                </div>
+              </div>
+              <div class="col-sm-3 col-md-3 px-2 d-flex align-items-end pb-md-3">
+                <div class="form-group d-flex mb-md-0 gap-2 flex-wrap">
+                  <div class="form-check">
+                    <input type="checkbox" id="no-show" class="form-check-input" formControlName="noShow" />
+                    <label for="no-show" class="form-check-label">No Show</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" id="no-show-foc" class="form-check-input" formControlName="noShowFoc" />
+                    <label for="no-show-foc" class="form-check-label">No Show FOC</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-end gap-2 mt-2">
+            <button class="btn btn-secondary" (click)="prevStep()">
+              <i class="feather icon-arrow-left"></i>
+              Back
+            </button>
+            <button class="btn btn-primary" (click)="nextStep(3)">
+              Next
+              <i class="feather icon-arrow-right"></i>
+            </button>
+          </div>
+        </div> -->
+
+
+        <div *ngIf="currentStep === 2">
+          <div class="h-responsive px-6rem" [formGroup]="passengerDetailsAndAllowances">
+            <div formArrayName="rooms">
+              <!-- <div *ngFor="let room of rooms.controls; let i = index" [formGroupName]="i">
+                <div class="row mt-4">
+                  <div class="col-md-11 p-0">
+                    <div class="row w-100 m-0 border pt-2  ">
+                      <div class="col-sm-3 col-md-1">
+                        <div class="form-group focused">
+                          <label class="form-control-label" for="rate">Rate<small class="text-danger">*</small></label>
+                          <input type="text" class="form-control" placeholder="Enter Rate" formControlName="rate" />
+                        </div>
+                      </div>
+                      <div class="col-sm-3 col-md-1">
+                        <div class="form-group focused">
+                          <label class="form-control-label" for="rate">Room<small class="text-danger">*</small></label>
+                          <input type="text" class="form-control" placeholder="Enter room" formControlName="room" />
+                        </div>
+                      </div>
+                      <div class="col-sm-3 col-md-1 px-2">
+                        <div class="form-group focused">
+                          <label class="form-control-label" for="pax">Pax<small class="text-danger">*</small></label>
+                          <input type="text" class="form-control" placeholder="Enter pax" formControlName="pax" />
+                        </div>
+                      </div>
+                      <div class="col-sm-3 col-md-1 px-2">
+                        <div class="form-group focused">
+                          <label class="form-control-label" for="name">Name<small class="text-danger">*</small></label>
+                          <input type="text" class="form-control" placeholder="Enter name"
+                            formControlName="customername" />
+                        </div>
+                      </div>
+                      <div class="col-sm-3 col-md-1 px-2">
+                        <div class="form-group focused">
+                          <label class="form-control-label" for="breakfast">Breakfast</label>
+                          <input type="number" class="form-control" placeholder="Enter breakfast"
+                            formControlName="breakfast" />
+                        </div>
+                      </div>
+                      <div class="col-sm-3 col-md-1 px-2">
+                        <div class="form-group focused">
+                          <label class="form-control-label" for="dinner">Dinner</label>
+                          <input type="number" class="form-control" placeholder="Enter dinner"
+                            formControlName="dinner" />
+                        </div>
+                      </div>
+                      <div class="col-sm-3 col-md-3 px-2 d-flex align-items-end pb-md-3">
+                        <div class="form-group d-flex mb-md-0 gap-2 flex-wrap">
+                          <div class="form-check">
+                            <input type="checkbox" [id]="'no-show-' + i" class="form-check-input"
+                              formControlName="no_show" />
+                            <label [for]="'no-show-' + i" class="form-check-label">No Show</label>
+                          </div>
+                          <div class="form-check">
+                            <input type="checkbox" [id]="'no-show-foc-' + i" class="form-check-input"
+                              formControlName="no_show_foc" />
+                            <label [for]="'no-show-foc-' + i" class="form-check-label">No Show FOC</label>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-sm-3 col-md-3 px-2 d-flex align-items-center justify-content-end">
+                        <span (click)="removeRoom(i)" class="remove-btn-minus"><i class="feather icon-minus"></i></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-1 p-0 d-flex justify-content-center align-items-center">
+                    <span (click)="addRoom()" class="add-btn-plus"><i class="feather icon-plus "></i></span>
+                  </div>
+                </div>
+              </div> -->
+
+              <div *ngFor="let room of rooms.controls; let i = index" [formGroupName]="i">
+                <div class="row mt-4">
+                  <div class="col-md-11 p-md-0">
+                    <div class="row w-100 m-0 border pt-2  ">
+                      <!-- Room Fields -->
+                      <div class="col-sm-3 col-md-1 px-2">
+                        <div class="form-group focused">
+                          <label class="form-control-label" for="rate">Rate<small class="text-danger">*</small></label>
+                          <input type="text" class="form-control" placeholder="Enter Rate" formControlName="rate"
+                            appTwoDigitDecimalNumber />
+                        </div>
+                      </div>
+                      <div class="col-sm-3 col-md-1 px-2">
+                        <div class="form-group focused">
+                          <label class="form-control-label" for="rate">Room<small class="text-danger">*</small></label>
+                          <input type="text" class="form-control" placeholder="Enter room" formControlName="room" />
+                        </div>
+                      </div>
+                      <div class="col-sm-3 col-md-1 px-2 ">
+                        <div class="form-group focused">
+                          <label class="form-control-label" for="pax">Pax<small class="text-danger">*</small></label>
+                          <input type="text" class="form-control" placeholder="Enter pax" formControlName="pax" />
+                        </div>
+                      </div>
+                      <div class="col-sm-3 col-md-3 px-2">
+                        <div class="form-group focused">
+                          <label class="form-control-label" for="name">Name<small class="text-danger">*</small></label>
+                          <input type="text" class="form-control" placeholder="Enter name"
+                            formControlName="customername" />
+                        </div>
+                      </div>
+                      <!-- Breakfast, Dinner, No Show, No Show FOC -->
+                      <div class="col-sm-3 col-md-1 px-2">
+                        <div class="form-group focused">
+                          <label class="form-control-label" for="breakfast">Breakfast</label>
+                          <input type="text" class="form-control" placeholder="Enter breakfast"
+                            formControlName="breakfast" appTwoDigitDecimaNumber />
+                        </div>
+                      </div>
+                      <div class="col-sm-3 col-md-1 px-2">
+                        <div class="form-group focused">
+                          <label class="form-control-label" for="dinner">Dinner</label>
+                          <input type="text" class="form-control" placeholder="Enter dinner" formControlName="dinner"
+                            appTwoDigitDecimaNumber />
+                        </div>
+                      </div>
+                      <div class="col-sm-3 col-md-3 px-2 d-flex align-items-end pb-md-3">
+                        <div class="form-group d-flex mb-md-0 gap-2 flex-wrap">
+                          <div class="form-check">
+                            <input type="checkbox" [id]="'no-show-' + i" class="form-check-input"
+                              formControlName="no_show" />
+                            <label [for]="'no-show-' + i" class="form-check-label">No Show</label>
+                          </div>
+                          <div class="form-check">
+                            <input type="checkbox" [id]="'no-show-foc-' + i" class="form-check-input"
+                              formControlName="no_show_foc" />
+                            <label [for]="'no-show-foc-' + i" class="form-check-label">No Show FOC</label>
+                          </div>
+
+                        </div>
+                      </div>
+
+                      <div class="col-sm-3 col-md-auto px-2 d-flex align-items-center justify-content-center">
+                        <span (click)="removeRoom(i)" class="remove-btn-minus"><i class="feather icon-minus"></i></span>
+                      </div>
+
+                      <!-- Remove Room Button -->
+                      <!-- *ngIf="i>0" -->
+                      <!-- <div class="d-flex justify-content-end">
+                       
+                      </div> -->
+                    </div>
+                  </div>
+                  <div class="col-md-1 p-0 d-flex justify-content-center align-items-center pb-2 pt-2 pb-md-0">
+                    <span (click)="addRoom()" class="add-btn-plus"><i class="feather icon-plus "></i></span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Add Room Button -->
+            <!-- <div class="d-flex justify-content-end gap-2 mt-2">
+            </div> -->
+
+          </div>
+          <div class="d-flex justify-content-end gap-2 mt-2">
+            <button class="btn btn-secondary" (click)="prevStep()">
+              <i class="feather icon-arrow-left"></i> Back
+            </button>
+            <button class="btn btn-primary" (click)="nextStep(3)">
+              Next <i class="feather icon-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+
+
+        <!-- Final Review and Confirmation -->
+        <div *ngIf="currentStep === 3">
+          <div class="h-responsive px-6rem">
+            <div class="d-flex flex-sm-row flex-column justify-content-between w-100 mb-4">
+              <div class="room-charge-details">
+              </div>
+            </div>
+            <!-- General Details -->
+            <div class="mb-4">
+              <h5 class="border-bottom pb-2">General Details</h5>
+              <div class="room-charge-details">
+                <div class="detail">
+                  <span class="label">Requested for:</span>
+                  <span class="value">Indellible-group</span>
+                </div>
+                <div class="detail">
+                  <span class="label">Reservation Requested by:</span>
+                  <span class="value">{{allFormValidData.agentName || "N/A"}}</span>
+                </div>
+                <div class="detail">
+                  <span class="label">Disruption Date:</span>
+                  <span class="value">{{allFormValidData.disruptionDate || "N/A"}}</span>
+                  <!-- Replace with actual date -->
+                </div>
+                <div class="detail">
+                  <span class="label">Requesting Port:</span>
+                  <span class="value">{{RequestingPortStep4.portname || "N/A"}}</span>
+                  <!-- Replace with actual port -->
+                </div>
+              </div>
+            </div>
+            <div class="mb-4">
+              <h5 class="border-bottom pb-2">Accommodation Allowances</h5>
+              <div class="room-charge-details">
+                <div class="detail">
+                  <span class="label">Total People in Group:</span>
+                  <span class="value">{{totalPaxStep4 || "N/A"}}</span>
+                </div>
+                <div class="detail">
+                  <span class="label">Number of Rooms:</span>
+                  <span class="value">{{numberOfRoomsStep4 || "N/A"}}</span>
+                </div>
+
+                <!-- <div class="detail">
+                  <span class="label">Number of Nights:</span>
+                  <span class="value">{{ nightsStep4 }} </span>
+                </div> -->
+
+                <div class="detail">
+                  <span class="label">Number of Nights:</span>
+                  <span class="value">{{ nightsStep4 }} </span>
+                </div>
+
+                <div class="detail">
+                  <span class="label">Room Charge per Night:</span>
+                  <span class="value">{{RoomChargepPerNight || "N/A"}}</span>
+                </div>
+                <!-- <div class="detail">
+                  <span class="label">Pay by:</span>
+                  <span class="value">Easyjet VCC EUR</span>
+                </div> -->
+                <div class="detail">
+                  <span class="label">Total Room Charge:</span>
+                  <span class="value total-amount">{{(TotalRoomCharge*nightsStep4 ) || '0'}} EUR</span>
+                </div>
+              </div>
+            </div>
+            <div class="mb-4">
+              <!-- Allowances -->
+              <h4 class="border-bottom pb-2">Allowances</h4>
+              <div class="room-charge-details">
+                <div class="detail">
+                  <!-- <span class="label">Allowance per breakfast:</span> -->
+                  <!-- <span class="value">{{gettingHotelData.breakfast_rate || "N/A"}}</span> -->
+                  <span class="label">Allowances for Breakfast:</span>
+                  <span class="value">{{AllowancesForBreakfastRate || "N/A"}}</span>
+                </div>
+                <div class="detail">
+                  <!-- <span class="label">Allowance per dinner:</span>
+                  <span class="value">{{gettingHotelData.dinner_rate || "N/A"}}</span> -->
+                  <span class="label">Allowance for dinner:</span>
+                  <span class="value">{{AllowancesForDinnerRate || "N/A"}}</span>
+                </div>
+                <div class="detail">
+                  <!-- <span class="label">Number of Breakfast:</span>
+                  <span class="value">{{NumberOfBreakfast || "N/A"}}</span> -->
+                  <span class="label">Number of pax:</span>
+                  <span class="value">{{NumberOfPax || "N/A"}}</span>
+                </div>
+
+                <div class="detail">
+                  <!-- <span class="label">Total Allowance from Breakfast:</span> -->
+                  <!-- <span class="value total-amount">{{TotalAllowanceFromBreakfast || "N/A" }} EUR</span> -->
+                  <span class="label">Total allowance for Breakfast:</span>
+                  <span class="value total-amount">{{TotalallowanceforBreakfast*nightsStep4 || "0" }} EUR</span>
+                </div>
+
+                <div class="detail">
+                  <!-- <span class="label">Total allowance for Dinner :</span> -->
+                  <!-- <span class="value">{{NumberOfDinner || "N/A"}}</span> -->
+                  <span class="label">Total allowance for Dinner :</span>
+                  <span class="value total-amount">{{TotalallowanceforDinner*nightsStep4 || "0"}} EUR</span>
+                </div>
+
+                <!-- <div class="detail">
+                  <span class="label">Total Allowance from dinner:</span>
+                  <span class="value total-amount">{{TotalAllowanceFromDinner || "N/A"}} EUR</span>
+                </div> -->
+
+
+              </div>
+            </div>
+            <!-- Accommodation & Transport Allowances -->
+            <div class="mb-4">
+              <!-- Hotel Details -->
+              <h5 class="border-bottom pb-2">Hotel Details</h5>
+              <table class="table table-bordered table-striped mt-2">
+                <thead class="table-light">
+                  <tr>
+                    <th>Hotel Name</th>
+                    <th>Nights</th>
+                    <th>Rooms</th>
+                    <th>Rates</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of step4roomsData">
+                    <td>{{gettingHotelData.hotel_name || "N/A"}}</td>
+                    <td>{{nightsStep4 || "N/A"}}</td>
+                    <td>{{data.room || "N/A"}}</td>
+                    <!-- <td>{{data.rate || "N/A" }} </td> -->
+                    <td>{{(data.no_show_foc ? "0" : data.rate) || "N/A" }} </td>
+
+                  </tr>
+                </tbody>
+              </table>
+              <div class="mt-2">
+                <div class="form-group mb-md-0">
+                  <label for="note">Note</label>
+                  <textarea name="" id="note" rows="3" class="form-control" placeholder="Enter Note" maxlength="200"
+                    [(ngModel)]="notesValue"></textarea>
+                </div>
+              </div>
+
+              <!-- Grand Total -->
+              <div class="mt-4">
+                <h4 class="text-end">
+                  Grand Total:
+                  <span class="text-primary">{{
+                    (TotalRoomCharge*nightsStep4 ) + ((TotalallowanceforBreakfast*nightsStep4) + (TotalallowanceforDinner*nightsStep4))
+                  }}
+                    EUR</span>
+                    <!-- <span class="text-primary">{{TotalallowanceforBreakfast}}
+                      EUR</span> -->
+
+                </h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex flex-wrap justify-content-end gap-2 mt-2">
+            <button class="btn btn-secondary" (click)="prevStep()">
+              <i class="feather icon-arrow-left"></i>
+              Back
+            </button>
+
+            <button class="btn btn-primary-dark" *ngIf="addEditReservationHeading == 'Add' && isAddReservationCompleted"
+              (click)="addReservationCopy()">
+              <i class="feather icon-copy"></i>
+              Copy
+            </button>
+            <button class="btn btn-primary-dark" *ngIf="addEditReservationHeading == 'Add'"
+              (click)="resetAddReservationAllForms()">
+              <i class="feather icon-refresh-ccw"></i>
+              Reset
+            </button>
+            <button class="btn btn-primary-dark" *ngIf="addEditReservationHeading == 'Add' && isAddReservationCompleted"
+              (click)="downloadAsPdf()">
+              <i class="feather icon-file"></i>
+              <span *ngIf="!isDownloadPdf">Download as Pdf</span>
+              <span *ngIf="isDownloadPdf">Downloading..</span>
+              <span *ngIf="isDownloadPdf" class="spinner-border spinner-border-sm" role="status"
+                aria-hidden="true"></span>
+            </button>
+            <button class="btn btn-primary" *ngIf="addEditReservationHeading == 'Add' && isAddReservationCompleted"
+              (click)="addReservationFinalize()">
+              <i class="feather icon-thumbs-up"></i>
+              Finalize
+            </button>
+            <button class="btn btn-primary" [disabled]="isAddReservationCompleted"
+              *ngIf="addEditReservationHeading == 'Add'" (click)="handleAddReservation()">
+              <span *ngIf="!isAddReservationSaving"><i class="feather icon-save"></i>Save</span>
+              <span *ngIf="isAddReservationSaving">Saving..</span>
+              <span *ngIf="isAddReservationSaving" class="spinner-border spinner-border-sm" role="status"
+                aria-hidden="true"></span>
+            </button>
+
+
+            <button class="btn btn-primary-dark" (click)="handleSendMail(conformationBox,'Send mail')"
+              *ngIf="addEditReservationHeading == 'Edit' ">
+              <i class="feather icon-arrow-up-right"></i>Send
+
+            </button>
+
+            <button class="btn btn-primary" *ngIf="addEditReservationHeading == 'Edit'"
+              (click)="EditReservationFinalize()">
+              <i class="feather icon-thumbs-up"></i>
+              Finalize
+            </button>
+
+            <button class="btn btn-primary-dark" *ngIf="addEditReservationHeading == 'Edit'"
+              (click)="EditDownloadAsPdf()">
+              <i class="feather icon-file"></i>
+              <span *ngIf="!isDownloadPdf">Download as Pdf</span>
+              <span *ngIf="isDownloadPdf">Downloading..</span>
+              <span *ngIf="isDownloadPdf" class="spinner-border spinner-border-sm" role="status"
+                aria-hidden="true"></span>
+            </button>
+
+            <button class="btn btn-primary" *ngIf="addEditReservationHeading == 'Edit'"
+              (click)="handleEditReservationSaveBtn()">
+              <span><i class="feather icon-save"></i> Edit Save </span>
+            </button>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="modal-footer">
+    <button type="button" class="btn btn-light border-gray" (click)="modal.close('Close click')">Close</button>
+    <button class="btn btn-primary">Next</button>
+  </div> -->
+</ng-template>
+
+<ng-template #selectHotel let-modal>
+  <div class="modal-header pt-3 pb-3">
+    <h5 class="modal-title">Select Hotel</h5>
+    <button type="button" class="btn-close border-0" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <div class="d-flex flex-sm-row flex-column justify-content-between align-items-center mb-2">
+      <div class="d-flex justify-content-center align-items-center">
+        <p class="mb-0">Show</p>
+        <select class="form-control wid-80 mx-2">
+          <option value="">10</option>
+          <option value="">25</option>
+          <option value="">50</option>
+          <option value="">100</option>
+        </select>
+        <p class="mb-0">entries</p>
+      </div>
+      <div class="d-flex gap-2 mobile mt-2 mt-md-0">
+        <div class="form-group mb-md-0 w-100">
+          <label for="time-period">Port</label>
+          <select id="time-period" class="form-control ng-untouched ng-pristine ng-valid" ng-reflect-model="daily">
+            <option value="daily" ng-reflect-value="daily">JFK</option>
+            <option value="weekly" ng-reflect-value="weekly">LAX</option>
+            <option value="monthly" ng-reflect-value="monthly">ORD</option>
+          </select>
+        </div>
+        <div class="form-group mb-md-0 w-100">
+          <label for="time-period">Hotel Name</label>
+          <input type="text" placeholder=" Enter hotel name" class="form-control" />
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="table white-space">
+        <thead>
+          <tr>
+            <th scope="col">
+              <div class="">
+                <input class="form-check-input" type="checkbox" />
+              </div>
+            </th>
+            <th scope="col">Hotel Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Address</th>
+            <th scope="col">Total Rooms</th>
+            <th scope="col">Telephone No.</th>
+            <th scope="col">Email</th>
+            <th scope="col">Availability</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <div class="">
+              <input class="form-check-input" type="checkbox" />
+            </div>
+            <th scope="row">Hilton</th>
+            <td>$200/night</td>
+            <td>123 Main Street, City</td>
+            <td>100</td>
+            <td>(555) 123-4567</td>
+            <td>hiltonexample.com</td>
+            <td><span class="badge badge-success h-fit">Available</span></td>
+            <td>
+              <div ngbDropdown container="body">
+                <button type="button" class="btn btn-sm border-0 text-dark" ngbDropdownToggle>
+                  <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                </button>
+                <div ngbDropdownMenu>
+                  <button ngbDropdownItem>
+                    <i class="feather icon-edit"></i>
+                    Edit
+                  </button>
+                  <button ngbDropdownItem>
+                    <i class="feather icon-trash-2"></i>
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <div class="">
+              <input class="form-check-input" type="checkbox" />
+            </div>
+            <th scope="row">Marriott</th>
+            <td>$250/night</td>
+            <td>456 Elm Street, City</td>
+            <td>150</td>
+            <td>(555) 987-6543</td>
+            <td>marriottexample.com</td>
+            <td><span class="badge badge-primary h-fit">Not Available</span></td>
+            <td>
+              <div ngbDropdown container="body">
+                <button type="button" class="btn btn-sm border-0 text-dark" ngbDropdownToggle>
+                  <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                </button>
+                <div ngbDropdownMenu>
+                  <button ngbDropdownItem>
+                    <i class="feather icon-edit"></i>
+                    Edit
+                  </button>
+                  <button ngbDropdownItem>
+                    <i class="feather icon-trash-2"></i>
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <div class="">
+              <input class="form-check-input" type="checkbox" />
+            </div>
+            <th scope="row">Hyatt</th>
+            <td>$180/night</td>
+            <td>789 Pine Avenue, City</td>
+            <td>120</td>
+            <td>(555) 234-5678</td>
+            <td>hyattexample.com</td>
+            <td><span class="badge badge-success h-fit">Available</span></td>
+            <td>
+              <div ngbDropdown container="body">
+                <button type="button" class="btn btn-sm border-0 text-dark" ngbDropdownToggle>
+                  <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                </button>
+                <div ngbDropdownMenu>
+                  <button ngbDropdownItem>
+                    <i class="feather icon-edit"></i>
+                    Edit
+                  </button>
+                  <button ngbDropdownItem>
+                    <i class="feather icon-trash-2"></i>
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <div class="">
+              <input class="form-check-input" type="checkbox" />
+            </div>
+            <th scope="row">Ritz-Carlton</th>
+            <td>$300/night</td>
+            <td>101 Ocean Drive, City</td>
+            <td>200</td>
+            <td>(555) 678-1234</td>
+            <td>ritz-carltonexample.com</td>
+            <td><span class="badge badge-success h-fit">Available</span></td>
+            <td>
+              <div ngbDropdown container="body">
+                <button type="button" class="btn btn-sm border-0 text-dark" ngbDropdownToggle>
+                  <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                </button>
+                <div ngbDropdownMenu>
+                  <button ngbDropdownItem>
+                    <i class="feather icon-edit"></i>
+                    Edit
+                  </button>
+                  <button ngbDropdownItem>
+                    <i class="feather icon-trash-2"></i>
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light border-gray" (click)="modal.close('Close click')">Close</button>
+    <button class="btn btn-primary">Save</button>
+  </div>
+</ng-template>
+
+
+<!-- msg_notes_inside_action -->
+<ng-template #reservation_notes let-modal>
+  <div class="modal-header pt-3 pb-3">
+    <h5 class="modal-title">Edit Notes</h5>
+    <button type="button" class="btn-close border-0" aria-label="Close"
+      (click)="modal.dismiss('Cross click');"></button>
+  </div>
+  <div class="modal-body">
+    <div class="row" [formGroup]="reservationEditNotesMsgForm">
+      <div class="col-md-12">
+        <div class="form-group focused">
+          <label class="form-control-label" for="rooms">Notes<small class="text-danger">*</small></label>
+          <textarea name="" id="" class="form-control" row="3" placeholder="" formControlName="message"
+            maxlength="200"></textarea>
+          <div class="text-danger">
+            <small
+              *ngIf="reservationEditNotesMsgForm.controls['message'].touched && reservationEditNotesMsgForm.controls['message'].errors?.['required']">
+              Note is required.
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light border-gray" (click)="modal.close('Close click')">Close</button>
+    <button class="btn btn-primary" (click)="handleEditNoteSave();">
+      <span *ngIf="!isHotelEditNoteSaving">Save</span>
+      <span *ngIf="isHotelEditNoteSaving">Updating..</span>
+      <span *ngIf="isHotelEditNoteSaving" class="spinner-border spinner-border-sm" role="status"
+        aria-hidden="true"></span>
+    </button>
+  </div>
+</ng-template>
+
+<!-- upload_incoice -->
+<ng-template #invoiceFileUploadBox let-modal>
+  <div class="modal-header pt-3 pb-3">
+    <h5 class="modal-title">Upload Files </h5>
+    <button type="button" class="btn-close border-0" aria-label="Close"
+      (click)="resetinvoiceFileUpload();modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body h-390">
+    <div class="row">
+      <form [formGroup]="invoiceFileUpload">
+        <div class="col-md-12 mb-3">
+          <div class="form-group">
+            <label class="form-control-label">
+              Drag or browse to the file you wish to upload for invoice:
+            </label>
+            <input type="file" class="form-control" id="orders-room-item-file-uploading"
+              (change)="onChangeFile($event)" />
+          </div>
+          <div *ngIf="errorMessageForOrderFile" class="text-danger">{{ errorMessageForOrderFile }}</div>
+          <!-- <ul *ngIf="selectedOrderFiles.length > 0">
+            <li *ngFor="let file of selectedOrderFiles">{{ file.name }}</li>
+          </ul> -->
+
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <!-- <button class="btn btn-primary">Submit to Mobel</button> -->
+    <button type="click" class="btn btn-primary" (click)="handleUploadInvoiceSave()">
+      <span *ngIf="!isInvoiceSave"> Upload File</span>
+      <span *ngIf="isInvoiceSave"> Uploading...</span>
+      <span *ngIf="isInvoiceSave" class="spinner-border spinner-border-sm"="status" aria-hidden="true"></span>
+    </button>
+    <button type="button" class="btn btn-light border-gray"
+      (click)="resetinvoiceFileUpload();modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
+
+<!-- confirmation_box -->
+
+<ng-template #conformationBox let-modal>
+  <div class="modal-body text-center">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="form-group mt-3">
+          <h2><i class="feather icon-alert-circle h1"></i></h2>
+          <h5 class="modal-title"> Are you sure you want to {{headingConformationBox || 'N/A'}}?</h5>
+        </div>
+        <div class="form-group d-flex gap-2 justify-content-center">
+          <button class="btn btn-primary" *ngIf="headingConformationBox=='Copy'" (click)="handleMakeACopySave()">Yes
+          </button>
+
+          <button class="btn btn-primary" *ngIf="headingConformationBox=='Cancel'" (click)="handleCancelSave()">Yes
+          </button>
+          <button class="btn btn-primary" *ngIf="headingConformationBox=='Ready to bill'"
+            (click)="handleReadyToBillSave()">Yes </button>
+
+          <button class="btn btn-primary" *ngIf="headingConformationBox=='Download PDF'"
+            (click)="handleDownloadPdfSave()">
+            <span *ngIf="!isDownloadPdf">Yes</span>
+            <span *ngIf="isDownloadPdf">Downloading..</span>
+            <span *ngIf="isDownloadPdf" class="spinner-border spinner-border-sm" role="status"
+              aria-hidden="true"></span>
+          </button>
+
+          <button class="btn btn-primary" *ngIf="headingConformationBox=='Send mail'" (click)="handleSendMailSave()">
+            <span *ngIf="!isSendMail">Yes</span>
+            <span *ngIf="isSendMail">Sending..</span>
+            <span *ngIf="isSendMail" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          </button>
+
+          <button class="btn btn-primary" *ngIf="headingConformationBox=='Reopen'" (click)="handleReopenSave()">
+            <span>Yes</span>
+           
+          </button>
+
+
+
+          <button type="button" class="btn btn-light border-gray" (click)="modal.close('Close click');">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

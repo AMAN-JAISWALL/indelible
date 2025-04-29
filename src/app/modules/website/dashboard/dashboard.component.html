@@ -1,0 +1,398 @@
+<div class="container-fluid py-3 px-md-5 px-2">
+  <h5 class="ng-star-inserted">Dashboard</h5>
+  <div class="card filter-card mb-2">
+    <div class="card-body card-body py-2 px-3">
+      <div class="filter-container">
+        <div class="row">
+
+          <div class="col-sm-6 col-lg-2 date-filter-field-1 date-filter-last-field">
+            <div class="form-group mb-md-0">
+              <label for="">Time Period</label>
+              <input class="form-control" type="text" [showDropdowns]="true" ngxDaterangepickerMd
+              [(ngModel)]="date_range" [showCustomRangeLabel]="true" [alwaysShowCalendars]="true"
+              [ranges]="ranges" [showClearButton]="true" placeholder="Select Range"
+              [ngModelOptions]="{standalone: true}" />
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-2">
+            <div class="form-group mb-md-0">
+              <label for="airline">Airline</label>
+              <select id="airline" class="form-control ng-untouched ng-pristine ng-valid" [(ngModel)]="selectedAirline">
+                <option [ngValue]="null">Select Airline</option>
+                <option *ngFor="let data of getAllAirlinesData" [value]="data.airlineid">{{ data.airlinename }}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-2">
+            <div class="form-group mb-md-0">
+              <label for="time-period">Port</label>
+              <select id="time-period" class="form-control ng-untouched ng-pristine ng-valid"
+                [(ngModel)]="selectedPort" (ngModelChange)="getActiveHotels()">
+                <option [ngValue]="null">All Port</option>
+                <option *ngFor="let data of getAllPortsData" [value]="data.portid">{{ data.portcode }}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-2">
+            <div class="form-group mb-md-0">
+              <label for="hotel">Hotel</label>
+              <select id="hotel" class="form-control ng-pristine ng-valid ng-touched" [(ngModel)]="selectedHotel"
+                ng-reflect-model="all">
+                <option [ngValue]="null">All Hotels</option>
+                <option *ngFor="let data of getHotelsData" [value]="data.hotel_id">{{ data.hotel_name }}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-2">
+            <div class="form-group mb-md-0">
+              <label for="status">Reservation Status</label>
+              <select id="status" class="form-control ng-pristine ng-valid ng-touched" 
+                ng-reflect-model="all"disabled>
+                <option>Finalize</option>
+              </select>
+            </div>
+          </div>
+
+
+          <div class="col-sm-2 col-lg-2 d-flex flex-sm-row flex-column align-items-end gap-2">
+            <div (click)="applyFilters()">
+              <button class="btn btn-primary"><i class="fa fa-check"></i></button>
+            </div>
+            <div (click)="resetFilters()">
+              <button class="btn btn-primary"><i class="feather icon-refresh-ccw"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h5 class="card-title my-3">Financial Metrics</h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 mb-2 mb-md-0">
+      <div class="card h-100">
+        <div class="card-body pb-0">
+          <h4>Total Revenue €{{(dashboardData.totalRevenue | number: '1.2-2') || 0}}</h4>
+          <p>Total earnings from all bookings.</p>
+          <div class="row">
+            <div class="col-md-4">
+              <p>Revenue from Rooms</p>
+              <p class="f-w-600 f-20 text-success">€{{(dashboardData['totalRoomRevenue'] | number: '1.2-2') || 0}}</p>
+            </div>
+            <div class="col-md-4">
+              <p>Revenue from Breakfast</p>
+              <p class="f-w-600 f-20 text-primary">€{{(dashboardData['totalBreakfastRevenue'] | number: '1.2-2') || 0}}
+              </p>
+            </div>
+            <div class="col-md-4">
+              <p>Revenue from Dinner</p>
+              <p class="f-w-600 f-20 text-warning">€{{(dashboardData['totalDinnerRevenue'] | number: '1.2-2') || 0}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2 mb-2 mb-md-0">
+      <div class="card h-100">
+        <div class="card-body pb-0">
+          <div class="pt-2">
+            <div class="avatar bg-light-warning"><i class="f-24 fas fa-key"></i></div>
+
+            <div class="pt-4">
+              <h4>Room Cost</h4>
+              <p>€{{(dashboardData['totalRoomCost'] | number: '1.2-2') || 0}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2 mb-2 mb-md-0">
+      <div class="card h-100">
+        <div class="card-body pb-0">
+          <div class="pt-2">
+            <div class="avatar bg-light-success"><i class="f-24 fas fa-chart-bar"></i></div>
+
+            <div class="pt-4">
+              <h4>Profit</h4>
+              <p>€{{(dashboardData['totalProfit'] | number: '1.2-2') || 0}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2 mb-2 mb-md-0">
+      <div class="card h-100">
+        <div class="card-body pb-0">
+          <div class="pt-2">
+            <div class="avatar bg-light-secondary"><i class="f-24 fas fa-hand-holding-usd"></i></div>
+
+            <div class="pt-4">
+              <h4>Profit Margin</h4>
+              <p>{{(dashboardData['totalProfitMargin'] | number: '1.2-2') || 0}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Number of Rooms Sold -->
+    <div class="col-md-12">
+      <h5 class="card-title my-3">Booking Metrics</h5>
+    </div>
+    <div class="col-lg-3 col-md-6">
+      <div class="card mb-2 mb-md-0">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="flex-shrink-0">
+              <div class="avatar bg-light-warning"><i class="f-24 feather icon-home"></i></div>
+            </div>
+            <div class="flex-grow-1 ms-3">
+              <p class="mb-1">Rooms Sold</p>
+              <div class="d-flex align-items-center justify-content-between">
+                <h4 class="mb-0">{{dashboardData['totalRoomsBooking'] || 0}}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Number of Pax (Passengers) -->
+    <div class="col-lg-3 col-md-6">
+      <div class="card mb-2 mb-md-0">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="flex-shrink-0">
+              <div class="avatar bg-light-success"><i class="f-24 feather icon-user"></i></div>
+            </div>
+            <div class="flex-grow-1 ms-3">
+              <p class="mb-1">Pax</p>
+              <div class="d-flex align-items-center justify-content-between">
+                <h4 class="mb-0">{{dashboardData['totalPaxBooking'] || 0}}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pax per Room -->
+    <div class="col-lg-3 col-md-6">
+      <div class="card mb-2 mb-md-0">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="flex-shrink-0">
+              <div class="avatar bg-light-secondary"><i class="f-24 feather icon-bar-chart"></i></div>
+            </div>
+            <div class="flex-grow-1 ms-3">
+              <p class="mb-1">Pax per Room</p>
+              <div class="d-flex align-items-center justify-content-between">
+                <h4 class="mb-0">{{dashboardData['paxPerRoom'] || 0}}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Number of Active Bookings -->
+    <div class="col-lg-3 col-md-6">
+      <div class="card mb-2 mb-md-0">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="flex-shrink-0">
+              <div class="avatar bg-light-danger"><i class="f-24 feather icon-briefcase"></i></div>
+            </div>
+            <div class="flex-grow-1 ms-3">
+              <p class="mb-1">Active Bookings</p>
+              <div class="d-flex align-items-center justify-content-between">
+                <h4 class="mb-0">{{dashboardData['activeBookings'] || 0}}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Average Room Rate -->
+    <div class="col-md-12">
+      <h5 class="card-title my-3">Key Performance Indicators</h5>
+    </div>
+    <div class="col-md-6 col-lg-4">
+      <app-card [hidHeader]="true" blockClass="text-center">
+        <i class="fa fa-bed text-c-blue d-block f-40"></i>
+        <h4 class="m-t-20">
+          <span class="text-c-blue">€{{(dashboardData['avgRoomRate'] | number: '1.2-2') || 0}}</span>
+          Average Room Rate
+        </h4>
+      </app-card>
+    </div>
+
+    <!-- Profit per Pax -->
+    <div class="col-md-6 col-lg-4">
+      <app-card [hidHeader]="true" blockClass="text-center">
+        <i class="fa fa-users text-c-green d-block f-40"></i>
+        <h4 class="m-t-20">
+          <span class="text-c-green">€{{(dashboardData['profitPerPax'] | number: '1.2-2') || 0}}</span>
+          Profit per Pax
+        </h4>
+      </app-card>
+    </div>
+
+    <!-- Cost per Room -->
+    <div class="col-md-6 col-lg-4">
+      <app-card [hidHeader]="true" blockClass="text-center">
+        <i class="fa fa-building text-c-red d-block f-40"></i>
+        <h4 class="m-t-20">
+          <span class="text-c-red">€{{(dashboardData['costPerRoom'] | number: '1.2-2') || 0}}</span>
+          Cost per Room
+        </h4>
+      </app-card>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-4 col-md-6">
+      <h5 class="card-title my-3">Operational Insights</h5>
+      <app-card [hidHeader]="true" footerClass="border border-top-0 p-0 overflow-hidden Operationalcard"
+        [isCardFooter]="true">
+        <h5>Open Bookings</h5>
+        <h6 class="m-0">
+          {{operationalData[0]?.['open_reservations'] || 0}} Reservation
+          <span class="text-c-blue ms-2">Bookings open</span>
+        </h6>
+        <div class="app-card-footer"></div>
+      </app-card>
+
+      <app-card [hidHeader]="true" footerClass="border border-top-0 p-0 overflow-hidden" [isCardFooter]="true">
+        <h5>Finalized Bookings</h5>
+        <h6 class="m-0">
+          {{operationalData[0]?.['finalized_reservations'] || 0}} Reservation
+          <span class="text-c-green ms-2">Finalized</span>
+        </h6>
+        <div class="app-card-footer"></div>
+      </app-card>
+
+      <app-card [hidHeader]="true" footerClass="border border-top-0 p-0 overflow-hidden" [isCardFooter]="true">
+        <h5>Billing</h5>
+        <h6 class="m-0">
+          {{operationalData[0]?.['ready_to_bill_reservations'] || 0}} Reservation<span class="text-c-red ms-2">Ready to
+            Bill</span>
+        </h6>
+        <div class="app-card-footer"></div>
+      </app-card>
+    </div>
+
+    <div class="col-lg-8 col-md-6">
+      <app-card class="position-relative" cardTitle="Revenue Comparsion" [options]="false">
+        <div class="position-absolute d-flex align-items-center gap-3  w-60 end-0 mt-3 me-3 top-0">
+          <!-- <div class="form-group mb-md-0 d-flex align-items-center gap-2 w-100">
+            <label for="hotel" class="m-0">Port</label>
+            <select id="time-period" class="form-control ng-untouched ng-pristine ng-valid" [(ngModel)]="breakdownPort"
+              (ngModelChange)="RevenueBreakdown(); getBreakdownHotels()">
+              <option [ngValue]="null">Select Port</option>
+              <option value="">All Port</option>
+              <option *ngFor="let data of getAllPortsData" [value]="data.portid">{{ data.portname }}</option>
+            </select>
+          </div>
+          <div class="form-group mb-md-0 d-flex align-items-center gap-2 w-100">
+            <label for="hotel" class="m-0">Hotel</label>
+            <select id="hotel" class="form-control ng-pristine ng-valid ng-touched" [(ngModel)]="breakdownHotel"
+              (ngModelChange)="RevenueBreakdown()" ng-reflect-model="all">
+              <option [ngValue]="null">All Hotels</option>
+              <option *ngFor="let data of getBreakdownHotelsData" [value]="data.hotel_id">{{ data.hotel_name }}</option>
+            </select>
+          </div> -->
+        </div>
+
+        <apx-chart [labels]="pie1CAC.labels!" [chart]="pie1CAC.chart!" [dataLabels]="pie1CAC.dataLabels!"
+          [series]="pie1CAC.series!" [colors]="pie1CAC.colors!" [responsive]="pie1CAC.responsive!"
+          [legend]="pie1CAC.legend!">
+        </apx-chart>
+      </app-card>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-md-12">
+          <app-card [hidHeader]="true">
+            <div class="row">
+              <div class="col-auto">
+                <span>Profit vs. Cost</span>
+              </div>
+              <div class="col text-end">
+                <h2 class="mb-0">€{{(dashboardData.totalRevenue | number: '1.2-2') || 0}}</h2>
+              </div>
+            </div>
+            <apx-chart [series]="chartOptions_1.series!" [chart]="chartOptions_1.chart!"
+              [stroke]="chartOptions_1.stroke!" [dataLabels]="chartOptions_1.dataLabels!"
+              [labels]="chartOptions_1.labels!" [legend]="chartOptions_1.legend!" [colors]="chartOptions_1.colors!"
+              [fill]="chartOptions_1.fill!" [grid]="chartOptions_1.grid!" [plotOptions]="chartOptions_1.plotOptions!"
+              [tooltip]="chartOptions_1.tooltip!"></apx-chart>
+            <div class="row mt-3 text-center">
+              <div class="col">
+                <h5 class="m-0">
+                  <i class="fas fa-circle f-10 m-r-5"></i>
+                  €{{(dashboardData.totalProfit | number: '1.2-2') || 0}}
+                </h5>
+                <span class="ms-1">Profit</span>
+              </div>
+              <div class="col">
+                <h5 class="m-0">
+                  <i class="fas fa-circle text-primary f-10 m-r-5"></i>
+                  €{{(dashboardData.totalCost | number: '1.2-2') || 0}}
+                </h5>
+                <span class="ms-1">Cost</span>
+              </div>
+            </div>
+          </app-card>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="col-md-8">
+      <app-card cardTitle="Comparative Analysis" [options]="false">
+        <apx-chart [dataLabels]="line1CAC.dataLabels!" [chart]="line1CAC.chart!" [stroke]="line1CAC.stroke!"
+          [colors]="line1CAC.colors!" [series]="line1CAC.series!" [title]="line1CAC.title!" [grid]="line1CAC.grid!"
+          [xaxis]="line1CAC.xaxis!"></apx-chart>
+      </app-card>
+    </div> -->
+
+    <div class="col-md-8">
+      <app-card ard cardTitle="Profit Margins" [options]="false">
+        <apx-chart [dataLabels]="bar1CAC.dataLabels!" [chart]="bar1CAC.chart!" [plotOptions]="bar1CAC.plotOptions!"
+          [stroke]="bar1CAC.stroke!" [colors]="bar1CAC.colors!" [series]="bar1CAC.series!" [tooltip]="bar1CAC.tooltip!"
+          [xaxis]="bar1CAC.xaxis!" [yaxis]="bar1CAC.yaxis!" [fill]="bar1CAC.fill!"></apx-chart>
+      </app-card>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12 col-md-6">
+      <app-card cardTitle="Revenue Trends" [options]="false">
+        <apx-chart *ngIf="chartOptions" [chart]="chartOptions.chart!" [dataLabels]="chartOptions.dataLabels!"
+          [stroke]="chartOptions.stroke!" [series]="chartOptions.series!" [xaxis]="chartOptions.xaxis!"
+          [colors]="chartOptions.colors!" [fill]="chartOptions.fill!" [markers]="chartOptions.markers!">
+        </apx-chart>
+      </app-card>
+    </div>
+  </div>
+
+
+</div>

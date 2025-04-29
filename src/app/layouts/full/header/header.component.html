@@ -1,0 +1,94 @@
+<mat-toolbar class="topbar">
+  <app-branding></app-branding>
+
+  <!-- --------------------------------------------------------------- -->
+  <!-- Desktop Menu -->
+
+  <!-- <button mat-icon-button (click)="toggleCollapsed.emit()" class="d-flex justify-content-center">
+    <i-tabler name="menu-2" class="icon-20 d-flex"></i-tabler>
+  </button> -->
+
+  <!-- Mobile Menu -->
+
+  <button
+    mat-icon-button
+    (click)="toggleMobileNav.emit()"
+    class="SideNavToggle d-flex justify-content-center"
+  >
+    <i-tabler name="menu-2" class="icon-20 d-flex"></i-tabler>
+  </button>
+
+  <!-- --------------------------------------------------------------- -->
+<span class="flex-1-auto d-block d-md-none"></span>
+  <span class="TopNavBar  flex-auto justify-content-center">
+    <div
+      class="menu-container d-flex align-content-center justify-content-center gap-4"
+      *ngIf="navItems?.length"
+    >
+    <ng-container *ngFor="let item of navItems">
+      <div
+        [routerLink]="item.route"
+        mat-menu-item
+        *ngIf="!item.children"
+        [ngClass]="{ 'active-item': isActive(item) }"
+        (click)="onItemSelected(item)"
+      >
+        <i-tabler class="routeIcon" name="{{ item.iconName }}"></i-tabler>
+        <span class="menu-text">{{ item.displayName }}</span>
+      </div>
+    </ng-container>
+
+    <!-- <ng-container >
+      <div mat-menu-item (click)="btn('/dashboard')">
+        <span class="menu-text">Dashboard</span>
+      </div>
+      <div mat-menu-item>
+        <span class="menu-text" (click)="btn('/extra/Vaucher')" >Voucher</span>
+      </div>
+    </ng-container> -->
+    
+    </div>
+  </span>
+  
+
+  <!-- --------------------------------------------------------------- -->
+  <!-- profile Dropdown -->
+  <!-- --------------------------------------------------------------- -->
+  <button
+    mat-icon-button
+    [matMenuTriggerFor]="profilemenu"
+    aria-label="Notifications"
+  >
+    <img
+      src="assets/images/profile/profilev1.jpg"
+      class="rounded-circle object-cover icon-35 profile-dd"
+      width="35"
+    />
+  </button>
+  <mat-menu #profilemenu="matMenu" class="cardWithShadow">
+    <button mat-menu-item>
+      <mat-icon class="d-flex align-items-center"
+        ><i-tabler name="settings" class="icon-18 d-flex"></i-tabler
+      ></mat-icon>
+      Settings
+    </button>
+    <button mat-menu-item>
+      <mat-icon class="d-flex align-items-center"
+        ><i-tabler name="users" class="icon-18 d-flex"></i-tabler
+      ></mat-icon>
+      Profile
+    </button>
+    <button mat-menu-item>
+      <mat-icon class="d-flex align-items-center"
+        ><i-tabler name="bell-off" class="icon-18 d-flex"></i-tabler
+      ></mat-icon>
+      Disable notifications
+    </button>
+    <button mat-menu-item [routerLink]="['/authentication/login']">
+      <mat-icon class="d-flex align-items-center"
+        ><i-tabler name="logout" class="icon-18 d-flex"></i-tabler
+      ></mat-icon>
+      Sign Out123
+    </button>
+  </mat-menu>
+</mat-toolbar>

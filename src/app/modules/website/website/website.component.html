@@ -1,0 +1,102 @@
+<nav class="navbar navbar navbar-expand-lg navbar-light header-blue shadow-header">
+  <div class="container-fluid m-auto">
+    <nav class="navbar w-100">
+      <div class="navbar-content w-100">
+        <!-- Logo on the left -->
+        <div class="logo">
+          <!-- routerLink="/website/home" -->
+          <a href="javascript:void(0);" >
+            <img src="assets/images/text-logo.svg" alt="Logo" class="h-45" />
+          </a>
+        </div>
+        <!-- Hamburger menu for small screens -->
+        <div class="hamburger text-dark pos-abs" (click)="toggleMenu()">&#9776;</div>
+
+        <!-- Menu in the center -->
+        <ul [class.active]="isMenuOpen" class="nav-links mb-0">
+          <li *ngIf="localData.roleid == 1">
+            <!-- routerLink="/website/home" -->
+            <a href="javascript:void(0);" routerLinkActive="myactive" routerLink="/website/dashboard"><i class="feather icon-grid me-1"></i> Dashboard</a>
+          </li>
+          <!-- <li>
+              <a href="javascript:void(0);" routerLinkActive="myactive">Order</a>
+            </li> -->
+          <!-- <li class="dropdown">
+              <a href="javascript:void(0);">Order</a>
+              <ul class="dropdown-menu">
+                <li><a href="javascript:void(0);">Reservation</a></li>
+                routerLink="/website/itemCategory"
+                <li><a href="javascript:void(0);">Hotels</a></li>
+                routerLink="/website/addtoCart"
+                <li><a href="javascript:void(0);" >Checkout</a></li>
+                routerLink="/website/checkout"
+                <li><a href="javascript:void(0);" >Track Order</a></li>
+                routerLink="/website/orderTrack"
+              </ul>
+            </li> -->
+
+          <li>
+            <a href="javascript:void(0);" routerLinkActive="myactive" routerLink="/website/reservation"><i class="me-1 feather icon-award"></i>Reservation</a>
+          </li>
+          <li>
+            <a href="javascript:void(0);" routerLinkActive="myactive" routerLink="/website/hotels">
+              <i class="me-1 feather icon-home"></i>Hotels
+            </a>
+          </li>
+          <!-- <li>
+            <a href="javascript:void(0);" routerLinkActive="myactive" routerLink="/website/checkout">
+              <i class="me-1 feather icon-home"></i>Hotels
+            </a>
+          </li> -->
+          <li *ngIf="localData.roleid == 1">
+            <a href="javascript:void(0);" routerLinkActive="myactive" routerLink="/website/usermanagement">
+              <i class="me-1 feather icon-users"></i>User Management
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0);" routerLinkActive="myactive">
+              <i class="me-1 feather icon-file-text"></i>Reports
+            </a>
+          </li>
+          <!-- <li>
+            <a href="javascript:void(0);" routerLinkActive="myactive">
+              <i class="me-1 feather icon-truck"></i>Transports
+            </a>
+          </li> -->
+          <!-- <li>
+            <a href="javascript:void(0);" routerLinkActive="myactive">
+              <i class="me-1 feather icon-airplay"></i>Airlines
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0);" routerLinkActive="myactive">
+              <i class="me-1 feather icon-anchor"></i>Ports
+            </a>
+          </li> -->
+         
+        </ul>
+
+        <!-- Login button on the right -->
+        <div class="login mt-3 mt-md-0">
+          <!-- routerLink="/auth/signin" -->
+          <a href="javascript:void(0);"  class="nav-btn me-3  primary-dark-bg text-white" (click)="handleLogout()" >
+            <i class="feather icon-log-in"></i>
+           Sign Out
+          </a>
+
+          <a href="javascript:" *ngIf="userDataGetFormMyPPComponent.profilepic == null"   placement="bottom" routerLink="/website/myprofile" >
+            <img [ngbTooltip]="userNameTooltipText" src="assets/images/user/profile_picture.png" class="img-radius wid-40" alt="User-Profile-Image" />
+          </a>
+
+          <a *ngIf="userDataGetFormMyPPComponent.profilepic" href="javascript:" placement="bottom" routerLink="/website/myprofile" >
+            <img [ngbTooltip]="userNameTooltipText" [src]="userDataGetFormMyPPComponent.profilepic" class="img-radius wid-40 h-40" alt="User-Profile-Image" />
+          </a>
+         
+        </div>
+      </div>
+    </nav>
+  </div>
+</nav>
+
+<!-- <app-top-nav></app-top-nav> -->
+<router-outlet></router-outlet>

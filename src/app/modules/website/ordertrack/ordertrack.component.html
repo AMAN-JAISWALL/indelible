@@ -1,0 +1,184 @@
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+      <div class="container">
+        <div class="banner_content d-md-flex justify-content-between align-items-center">
+          <div class="mb-3 mb-md-0">
+            <h1 class="text-white playfair-display" >Track Order</h1>
+            <!-- <p class="text-white">Very us move be blessed multiply night</p> -->
+          </div>
+          <div class="page_link">
+            <a href="javascript:(0);" routerLink="/website/home">Home</a>
+            <a href="javascript:(0);">/</a>
+            <a href="javascript:(0);">Track Order</a>
+          </div>
+        </div>
+       
+      </div>
+    </div>
+  </section>
+
+  <div class="container mb-90 mt-5">
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col-md-2">
+                    <img src="assets/images/product/inspired-1.jpg" alt="Image" class="img-fluid rounded">
+                </div>
+                <div class="col-md-4">
+                    <h5>Premium quality kitchen</h5>
+                   <button class="btn btn-primary-dark btn-sm" (click)="showTracker()">Track your Order <i class="feather icon-chevron-down"></i></button>
+                    
+                </div>
+                <div class="col-md-2 text-left">
+                    <p class="mb-2"><strong>Price</strong> </p>
+                    <p>$12,267.00</p>
+                </div>
+                <div class="col-md-2 text-left">
+                    <p class="mb-2"><strong>Status</strong></p>
+                    <p class="badge bg-success">Order confirmed</p>
+                </div>
+                <div class="col-md-2 text-left">
+                    <p class="mb-2"><strong>Expected Delivery</strong></p>
+                    <p>23rd November 2024</p>
+                </div>
+            </div>
+            <div class="row mt-3" *ngIf="tracker">
+                <div class="col-md-12">
+                    <ul class="progressbar">
+                        <li class="active">
+                            <div class="step-icon"><i class="fas fa-check"></i></div>
+                            <p class="mb-0">Order confirmed</p>
+                            <small>15/11/2024</small>
+        
+                        </li>
+                        <li class="">
+                            <div class="step-icon"><i class="fas fa-user"></i></div>
+                            <p class="mb-0">Picked by courier</p>
+                            <small>17/11/2024</small>
+                        </li>
+                        <li>
+                            <div class="step-icon"><i class="fas fa-truck"></i></div>
+                            <p class="mb-0">On the way</p>
+                            <small>19/11/2024</small>
+                        </li>
+                        <li>
+                            <div class="step-icon"><i class="fas fa-box-open"></i></div>
+                            <p class="mb-0">Ready for pickup</p>
+                            <small>Expected  23/11/2024</small>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col-md-2">
+                    <img src="assets/images/product/inspired-2.jpg" alt="Image" class="img-fluid rounded">
+                </div>
+                <div class="col-md-4">
+                    <h5>Wood cabinets create a warm..</h5>
+                   <button class="btn btn-primary-dark btn-sm" (click)="showTracker2()">Track your Order <i class="feather icon-chevron-down"></i></button>
+                    
+                </div>
+                <div class="col-md-2 text-left">
+                    <p class="mb-2"><strong>Price</strong> </p>
+                    <p>$12,267.00</p>
+                </div>
+                <div class="col-md-2 text-left">
+                    <p class="mb-2"><strong>Status</strong></p>
+                    <p class="badge bg-success">Order confirmed</p>
+                </div>
+                <div class="col-md-2 text-left">
+                    <p class="mb-2"><strong>Expected Delivery</strong></p>
+                    <p>23rd November 2024</p>
+                </div>
+            </div>
+            <div class="row mt-3" *ngIf="tracker2">
+                <div class="col-md-12">
+                    <ul class="progressbar">
+                        <li class="active">
+                            <div class="step-icon"><i class="fas fa-check"></i></div>
+                            <p class="mb-0">Order confirmed</p>
+                            <small>15/11/2024</small>
+        
+                        </li>
+                        <li class="">
+                            <div class="step-icon"><i class="fas fa-user"></i></div>
+                            <p class="mb-0">Picked by courier</p>
+                            <small>17/11/2024</small>
+                        </li>
+                        <li>
+                            <div class="step-icon"><i class="fas fa-truck"></i></div>
+                            <p class="mb-0">On the way</p>
+                            <small>19/11/2024</small>
+                        </li>
+                        <li>
+                            <div class="step-icon"><i class="fas fa-box-open"></i></div>
+                            <p class="mb-0">Ready for pickup</p>
+                            <small>Expected  23/11/2024</small>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col-md-2">
+                    <img src="assets/images/product/inspired-3.jpg" alt="Image" class="img-fluid rounded">
+                </div>
+                <div class="col-md-4">
+                    <h5>Inviting look that’s modern</h5>
+                   <button class="btn btn-primary-dark btn-sm" (click)="showTracker3()">Track your Order <i class="feather icon-chevron-down"></i></button>
+                    
+                </div>
+                <div class="col-md-2 text-left">
+                    <p class="mb-2"><strong>Price</strong> </p>
+                    <p>$12,267.00</p>
+                </div>
+                <div class="col-md-2 text-left">
+                    <p class="mb-2"><strong>Status</strong></p>
+                    <p class="badge bg-success">Order confirmed</p>
+                </div>
+                <div class="col-md-2 text-left">
+                    <p class="mb-2"><strong>Expected Delivery</strong></p>
+                    <p>23rd November 2024</p>
+                </div>
+            </div>
+            <div class="row mt-3" *ngIf="tracker3">
+                <div class="col-md-12">
+                    <ul class="progressbar">
+                        <li class="active">
+                            <div class="step-icon"><i class="fas fa-check"></i></div>
+                            <p class="mb-0">Order confirmed</p>
+                            <small>15/11/2024</small>
+        
+                        </li>
+                        <li class="">
+                            <div class="step-icon"><i class="fas fa-user"></i></div>
+                            <p class="mb-0">Picked by courier</p>
+                            <small>17/11/2024</small>
+                        </li>
+                        <li>
+                            <div class="step-icon"><i class="fas fa-truck"></i></div>
+                            <p class="mb-0">On the way</p>
+                            <small>19/11/2024</small>
+                        </li>
+                        <li>
+                            <div class="step-icon"><i class="fas fa-box-open"></i></div>
+                            <p class="mb-0">Ready for pickup</p>
+                            <small>Expected  23/11/2024</small>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+  </div>

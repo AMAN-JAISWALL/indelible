@@ -1,0 +1,71 @@
+<!-- Start design for login-v2 -->
+
+<div class="hero align-items-center justify-content-center min-vh-100 d-flex"
+  style="background-image: url(assets/images/loginbg.jpg);">
+
+  <div class="container">
+    <form [formGroup]="signInForm">
+      <div class="">
+        <div class="wid-login">
+          <div class="logo text-center">
+            <img src="assets/images/text-logo.svg" class="img-fluid login-logo-sec">
+          </div>
+          <h3 class="mb-3 f-w-400 mt-4">Sign In</h3>
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address / Username <small class="text-danger">*</small></label>
+            <input formControlName="email" type="text" class="form-control p-t-b-10 rounded-0"
+              placeholder="Enter email">
+            <div class="text-danger">
+              <small *ngIf="signInForm.controls['email'].touched && signInForm.controls['email'].errors?.['required']">
+                Email is required.
+              </small>
+              <small *ngIf="signInForm.controls['email'].touched && signInForm.controls['email'].errors?.['email']">
+                Enter a valid email address.
+              </small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password <small class="text-danger">*</small></label>
+            <div class="input-group" id="show_hide_password">
+              <input class="form-control p-t-b-10 rounded-0 " [type]="isPasswordVisible ? 'text' : 'password'"
+                placeholder="Password" value="Password" formControlName="password" autocomplete="off">
+              <div class="input-group-addon passwordEyesElem" (click)="togglePasswordVisibility()">
+                <span class="input-group-text bg-white cursor-pointer p-t-b-10 rounded-0 p-15">
+                  <i *ngIf="!isPasswordVisible" class="feather icon-eye-off"></i>
+                  <i *ngIf="isPasswordVisible" class="feather icon-eye"></i>
+                </span>
+              </div>
+            </div>
+
+            <div class="text-danger">
+              <small
+                *ngIf="signInForm.controls['password'].touched && signInForm.controls['password'].errors?.['required']">
+                Password is required.
+              </small>
+              <small
+                *ngIf="signInForm.controls['password'].touched && signInForm.controls['password'].errors?.['minlength']">
+                Password should be at least 6 characters long.
+              </small>
+            </div>
+          </div>
+
+          <div class="form-group text-start mt-2">
+            <div class="checkbox checkbox-primary d-inline">
+              <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" formControlName="rememberMe" />
+              <label for="checkbox-fill-a1" class="cr">Remember password</label>
+            </div>
+          </div>
+
+          <div class="d-grid">
+            <!-- [routerLink]="['/auth/verification']" -->
+            <button class="btn btn-block theme-btn mb-0" (click)="handleSingIn()">Sign In</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>
+<!-- End design for login-v2 -->

@@ -1,0 +1,51 @@
+.flex-auto {
+    flex: auto;
+}
+
+.TopNavBar .mat-mdc-menu-item-text {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: whitesmoke;
+    font-weight: 300;
+    font-size: 15px;
+}
+
+.mat-mdc-menu-item {
+    overflow: visible !important;
+}
+
+.active-item {
+    background-color: #50797b !important;
+    /* Highlight color */
+    border-radius: 4px;
+    font-weight: bold !important;
+    color: #000000 !important;
+    /* Highlight text color */
+}
+
+.routeIcon {
+    width: 20px !important;
+    height: 20px !important;
+}
+
+.TopNavBar {
+    display: flex !important;
+}
+
+@media screen and (max-width:769px) {
+    .TopNavBar {
+        display: none !important;
+    }
+
+}
+
+@media screen and (min-width:769px) {
+
+    .SideNavToggle {
+        display: none !important;
+    }
+    .d-md-none{
+        display: none !important;
+    }
+}

@@ -1,0 +1,1133 @@
+
+
+<div class="container-fluid px-5 py-3">
+  <div class="row">
+    <div class="col-md-12">
+      <h5 class="m-b-10 fs-20">
+        <a href="javascript:void(0)" routerLink="/website/reservation" class="text-black-new">
+          <i class="feather icon-arrow-left"></i>
+          Add Reservation
+        </a>
+      </h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div>
+            <div class="steps d-flex justify-content-between mb-2">
+              <div *ngFor="let step of steps; let i = index" class="step text-center" [class.active]="currentStep === i">
+                <div class="circle">{{ i + 1 }}</div>
+                <p class="my-1">{{ step }}</p>
+              </div>
+            </div>
+
+            <div class="step-content">
+              <div *ngIf="currentStep === 0">
+                <div class="row">
+                  <div class="col-12">
+                    <h6 class="p-b-10 border-b">Flight details</h6>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group focused">
+                      <label class="form-control-label" for="agent-name">Agent's Name</label>
+                      <input type="text" id="agent-name" class="form-control" placeholder="Enter agent's name" />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group focused">
+                      <label class="form-control-label" for="requesting-port">Requesting Port</label>
+                      <input type="text" id="requesting-port" class="form-control" placeholder="Enter port name" />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group focused">
+                      <label class="form-control-label" for="hotels">Hotels</label>
+                      <button (click)="openSelectHotelSec(selectHotel)" class="btn btn-primary w-100">
+                        <i class="feather icon-plus"></i>
+                        Select Hotels
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group focused">
+                      <label class="form-control-label" for="invoice-to">Invoice To</label>
+                      <input type="text" id="invoice-to" class="form-control" placeholder="Enter invoice details" />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group focused">
+                      <label class="form-control-label" for="requesting-airline">Requesting Airline</label>
+                      <input type="text" id="requesting-airline" class="form-control" placeholder="Enter airline name" />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group focused">
+                      <label class="form-control-label" for="flight-number">Flight Number</label>
+                      <input type="text" id="flight-number" class="form-control" placeholder="Enter flight number" />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group focused">
+                      <label class="form-control-label" for="flight-type">Flight Type</label>
+                      <input type="text" id="flight-type" class="form-control" placeholder="Enter flight type" />
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group focused">
+                      <label class="form-control-label" for="flight-date">Flight Date</label>
+                      <input type="date" id="flight-date" class="form-control" />
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-end gap-2">
+                  <button class="btn btn-primary" (click)="nextStep()"> Next <i class="feather icon-arrow-right"></i></button>
+                </div>
+              </div>
+
+              <div *ngIf="currentStep === 1">
+                <div class="row">
+                  <div class="col-12">
+                    <h6 class="p-b-10 border-b">Booking Details, Hotel Selection and Rates</h6>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group focused">
+                      <label class="form-control-label" for="request-received">Request Received</label>
+                      <input type="text" id="request-received" class="form-control" placeholder="Enter request received date" />
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group focused">
+                      <label class="form-control-label" for="check-in-date">Check-In Date</label>
+                      <input type="date" id="check-in-date" class="form-control" />
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group focused">
+                      <label class="form-control-label" for="check-out-date">Check-Out Date</label>
+                      <input type="date" id="check-out-date" class="form-control" />
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group focused">
+                      <label class="form-control-label" for="selected-hotel">Selected Hotel</label>
+                      <input type="text" id="selected-hotel" class="form-control" placeholder="Enter selected hotel" />
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group focused">
+                      <label class="form-control-label" for="room-type">Room Type</label>
+                      <input type="text" id="room-type" class="form-control" placeholder="Enter room type" />
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group focused">
+                      <label class="form-control-label" for="rooms">Rooms</label>
+                      <input type="number" id="rooms" class="form-control" placeholder="Enter number of rooms" />
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group focused">
+                      <label class="form-control-label" for="rates">Rates</label>
+                      <input type="number" id="rates" class="form-control" placeholder="Enter rates per night" />
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group focused">
+                      <label class="form-control-label" for="total">Total</label>
+                      <input type="number" id="total" class="form-control" placeholder="Enter total cost" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-end gap-2">
+                  <button class="btn btn-secondary" (click)="prevStep()"> <i class="feather icon-arrow-left"></i> Back</button>
+                  <button class="btn btn-primary" (click)="nextStep()">Next  <i class="feather icon-arrow-right"></i></button>
+                </div>
+              </div>
+
+              <div *ngIf="currentStep === 2">
+                <div class="">
+                  <div class="row">
+                    <div class="col-12">
+                      <h6 class="p-b-10 border-b">Passenger Details and Allowances</h6>
+                    </div>
+                    <div class="col-12">
+                      <h6 class="p-b-10 border-b">Passenger Details</h6>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="pax-in-group">Pax in Group</label>
+                        <input type="number" id="pax-in-group" class="form-control" placeholder="Enter number of passengers in group" />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="passenger-name-1">Passenger Name 1</label>
+                        <input type="text" id="passenger-name-1" class="form-control" placeholder="Enter passenger's name" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <h6 class="p-b-10 border-b">Allowances</h6>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="allowance-type">Allowance Type</label>
+                        <select id="allowance-type" class="form-control">
+                          <option value="">Select Type</option>
+                          <option value="Luggage">Luggage</option>
+                          <option value="Food">Food</option>
+                          <option value="Beverages">Beverages</option>
+                          <!-- Add more allowance types as needed -->
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="pax">PAX</label>
+                        <input type="number" id="pax" class="form-control" placeholder="Enter PAX" />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="quantity">Quantity</label>
+                        <input type="number" id="quantity" class="form-control" placeholder="Enter quantity" />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="amount">Amount</label>
+                        <input type="number" id="amount" class="form-control" placeholder="Enter amount" />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="total">Total</label>
+                        <input type="number" id="total" class="form-control" placeholder="Enter total" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="table-responsive">
+                        <table class="table white-space">
+                          <thead>
+                            <tr>
+                              <th scope="col">Type</th>
+                              <th scope="col">Pax</th>
+                              <th scope="col">Quantity</th>
+                              <th scope="col">Amount</th>
+                              <th scope="col">Total</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row">Hotel Room</th>
+                              <td>2</td>
+                              <td>1</td>
+                              <td>$200/night</td>
+                              <td>$200</td>
+                              <td>
+                                <div ngbDropdown container="body">
+                                  <button type="button" class="btn btn-sm border-0 text-dark" ngbDropdownToggle>
+                                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                  </button>
+                                  <div ngbDropdownMenu>
+                                    <button ngbDropdownItem>
+                                      <i class="feather icon-edit"></i>
+                                      Edit
+                                    </button>
+                                    <button ngbDropdownItem>
+                                      <i class="feather icon-trash-2"></i>
+                                      Delete
+                                    </button>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Hotel Room</th>
+                              <td>3</td>
+                              <td>1</td>
+                              <td>$250/night</td>
+                              <td>$250</td>
+                              <td>
+                                <div ngbDropdown container="body">
+                                  <button type="button" class="btn btn-sm border-0 text-dark" ngbDropdownToggle>
+                                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                  </button>
+                                  <div ngbDropdownMenu>
+                                    <button ngbDropdownItem>
+                                      <i class="feather icon-edit"></i>
+                                      Edit
+                                    </button>
+                                    <button ngbDropdownItem>
+                                      <i class="feather icon-trash-2"></i>
+                                      Delete
+                                    </button>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Hotel Room</th>
+                              <td>2</td>
+                              <td>1</td>
+                              <td>$180/night</td>
+                              <td>$180</td>
+                              <td>
+                                <div ngbDropdown container="body">
+                                  <button type="button" class="btn btn-sm border-0 text-dark" ngbDropdownToggle>
+                                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                  </button>
+                                  <div ngbDropdownMenu>
+                                    <button ngbDropdownItem>
+                                      <i class="feather icon-edit"></i>
+                                      Edit
+                                    </button>
+                                    <button ngbDropdownItem>
+                                      <i class="feather icon-trash-2"></i>
+                                      Delete
+                                    </button>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Hotel Room</th>
+                              <td>4</td>
+                              <td>1</td>
+                              <td>$300/night</td>
+                              <td>$300</td>
+                              <td>
+                                <div ngbDropdown container="body">
+                                  <button type="button" class="btn btn-sm border-0 text-dark" ngbDropdownToggle>
+                                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                  </button>
+                                  <div ngbDropdownMenu>
+                                    <button ngbDropdownItem>
+                                      <i class="feather icon-edit"></i>
+                                      Edit
+                                    </button>
+                                    <button ngbDropdownItem>
+                                      <i class="feather icon-trash-2"></i>
+                                      Delete
+                                    </button>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-end gap-2">
+                  <button class="btn btn-secondary" (click)="prevStep()"><i class="feather icon-arrow-left"></i> Back</button>
+                  <button class="btn btn-primary" (click)="nextStep()">Next <i class="feather icon-arrow-right"></i></button>
+                </div>
+              </div>
+
+              <div *ngIf="currentStep === 3">
+                <div class="col-12">
+                  <h6 class="p-b-10 border-b">Final Review and Confirmation</h6>
+                </div>
+                <div>
+                  <div class="d-flex flex-sm-row flex-column justify-content-between w-100 mb-4">
+                    <h5 class="f-w-600">Accomodation Requested for:</h5>
+                    <div>
+                      <p class="mb-2">easyjet Airline Company Limited (Portugal DP)</p>
+                      <div class="detail">
+                        <span class="label">Address:</span>
+                        <span class="value ms-2">
+                          Invoice Billing Details: easyJet Airline Company Limited (Portugal DP) PT980467101 Terminal 2, Aeroporto Lisboa,
+                          Lisbon 1700-111, Portugal
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- General Details -->
+                  <div class="mb-4">
+                    <h5 class="border-bottom pb-2">General Details</h5>
+                    <div class="room-charge-details">
+                      <div class="detail">
+                        <span class="label">Reservation number:</span>
+                        <span class="value">VC4971</span>
+                      </div>
+                      <div class="detail">
+                        <span class="label">Reservation requested by:</span>
+                        <span class="value">CS(airline employee)</span>
+                      </div>
+                      <div class="detail">
+                        <span class="label">Port:</span>
+                        <span class="value">JFK</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <h5 class="border-bottom pb-2">Accommodation & Transport Allowances</h5>
+                    <div class="room-charge-details">
+                      <div class="detail">
+                        <span class="label">Total People in Group:</span>
+                        <span class="value">5 People</span>
+                      </div>
+                      <div class="detail">
+                        <span class="label">Number of Rooms:</span>
+                        <span class="value">3 Rooms</span>
+                      </div>
+                      <div class="detail">
+                        <span class="label">Number of Nights:</span>
+                        <span class="value">4 Night</span>
+                      </div>
+                      <div class="detail">
+                        <span class="label">Room Charge per Night:</span>
+                        <span class="value">220 EUR</span>
+                      </div>
+                    </div>
+                    <div class="d-flex w-100 align-items-center gap-3">
+                      <span class="label">Total Room Charge:</span>
+                      <span class="value total-amount">450 EUR</span>
+                    </div>
+                  </div>
+                  <!-- Accommodation & Transport Allowances -->
+                  <div class="mb-4">
+                    <!-- Hotel Details -->
+                    <h5 class="border-bottom pb-2">Hotel Details</h5>
+                    <div class="table-responsive">
+                      <table class="table table-bordered table-striped mt-2">
+                        <thead class="table-light">
+                          <tr>
+                            <th>Hotel Name</th>
+                            <th>Nights</th>
+                            <th>Rooms</th>
+                            <th>Rates</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Hotel California</td>
+                            <td>3</td>
+                            <td>2</td>
+                            <td>$150 per night</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                
+
+                    <!-- Allowances -->
+                    <h4 class="mt-4">Allowances</h4>
+                    <div class="room-charge-details">
+                      <div class="detail">
+                        <span class="label">Allowance per breakfast:</span>
+                        <span class="value">10</span>
+                      </div>
+                      <div class="detail">
+                        <span class="label">Number of Breakfast:</span>
+                        <span class="value">2</span>
+                      </div>
+                    </div>
+                    <div class="d-flex w-100 align-items-center gap-3">
+                      <span class="label">Total Allowance from Creakfast:</span>
+                      <span class="value total-amount">20 EUR</span>
+                    </div>
+                    <!-- <table class="table table-bordered table-striped mt-2">
+                        <thead class="table-light">
+                          <tr>
+                            <th>Type</th>
+                            <th>Amount</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Transport Allowance</td>
+                            <td>$100</td>
+                          </tr>
+                          <tr>
+                            <td>Meal Allowance</td>
+                            <td>$50</td>
+                          </tr>
+                        </tbody>
+                      </table> -->
+
+                    <!-- Grand Total -->
+                    <div class="mt-4">
+                      <h4 class="text-end">
+                        Grand Total:
+                        <span class="text-primary">$650</span>
+                      </h4>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-end gap-2">
+                  <button class="btn btn-secondary" (click)="prevStep()"><i class="feather icon-arrow-left"></i> Back</button>
+                  <button class="btn btn-primary-dark" (click)="finish()"><i  class="feather icon-arrow-up-right"></i> Send </button>
+                  <button class="btn btn-primary" (click)="finish()"><i class="feather icon-save"></i> Save</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #newaccount let-modal>
+  <div class="modal-header pt-3 pb-3">
+    <h5 class="modal-title">Add Reservation</h5>
+    <button type="button" class="btn-close border-0" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <!-- app.component.html -->
+    <div>
+      <div class="steps d-flex justify-content-between mb-2">
+        <div *ngFor="let step of steps; let i = index" class="step text-center" [class.active]="currentStep === i">
+          <div class="circle">{{ i + 1 }}</div>
+          <p class="my-1">{{ step }}</p>
+        </div>
+      </div>
+
+      <div class="step-content">
+        <div *ngIf="currentStep === 0">
+          <div class="row">
+            <div class="col-12">
+              <h6 class="p-b-10 border-b">Flight details</h6>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group focused">
+                <label class="form-control-label" for="agent-name">Agent's Name</label>
+                <input type="text" id="agent-name" class="form-control" placeholder="Enter agent's name" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group focused">
+                <label class="form-control-label" for="requesting-port">Requesting Port</label>
+                <input type="text" id="requesting-port" class="form-control" placeholder="Enter port name" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group focused">
+                <label class="form-control-label" for="hotels">Hotels</label>
+                <button (click)="openSelectHotelSec(selectHotel)" class="btn btn-primary w-100">
+                  <i class="feather icon-plus"></i>
+                  Select Hotels
+                </button>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group focused">
+                <label class="form-control-label" for="invoice-to">Invoice To</label>
+                <input type="text" id="invoice-to" class="form-control" placeholder="Enter invoice details" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group focused">
+                <label class="form-control-label" for="requesting-airline">Requesting Airline</label>
+                <input type="text" id="requesting-airline" class="form-control" placeholder="Enter airline name" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group focused">
+                <label class="form-control-label" for="flight-number">Flight Number</label>
+                <input type="text" id="flight-number" class="form-control" placeholder="Enter flight number" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group focused">
+                <label class="form-control-label" for="flight-type">Flight Type</label>
+                <input type="text" id="flight-type" class="form-control" placeholder="Enter flight type" />
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group focused">
+                <label class="form-control-label" for="flight-date">Flight Date</label>
+                <input type="date" id="flight-date" class="form-control" />
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-end gap-2">
+            <button class="btn btn-primary" (click)="nextStep()">Next <i class="feather icon-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <div *ngIf="currentStep === 1">
+          <div class="row">
+            <div class="col-12">
+              <h6 class="p-b-10 border-b">Booking Details, Hotel Selection and Rates</h6>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group focused">
+                <label class="form-control-label" for="request-received">Request Received</label>
+                <input type="text" id="request-received" class="form-control" placeholder="Enter request received date" />
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group focused">
+                <label class="form-control-label" for="check-in-date">Check-In Date</label>
+                <input type="date" id="check-in-date" class="form-control" />
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group focused">
+                <label class="form-control-label" for="check-out-date">Check-Out Date</label>
+                <input type="date" id="check-out-date" class="form-control" />
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group focused">
+                <label class="form-control-label" for="selected-hotel">Selected Hotel</label>
+                <input type="text" id="selected-hotel" class="form-control" placeholder="Enter selected hotel" />
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group focused">
+                <label class="form-control-label" for="room-type">Room Type</label>
+                <input type="text" id="room-type" class="form-control" placeholder="Enter room type" />
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group focused">
+                <label class="form-control-label" for="rooms">Rooms</label>
+                <input type="number" id="rooms" class="form-control" placeholder="Enter number of rooms" />
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group focused">
+                <label class="form-control-label" for="rates">Rates</label>
+                <input type="number" id="rates" class="form-control" placeholder="Enter rates per night" />
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group focused">
+                <label class="form-control-label" for="total">Total</label>
+                <input type="number" id="total" class="form-control" placeholder="Enter total cost" />
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-end gap-2">
+            <button class="btn btn-secondary" (click)="prevStep()">Back</button>
+            <button class="btn btn-primary" (click)="nextStep()">Next</button>
+          </div>
+        </div>
+
+        <div *ngIf="currentStep === 2">
+          <div class="h-280">
+            <div class="row">
+              <div class="col-12">
+                <h6 class="p-b-10 border-b">Passenger Details and Allowances</h6>
+              </div>
+              <div class="col-12">
+                <h6 class="p-b-10 border-b">Passenger Details</h6>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group focused">
+                  <label class="form-control-label" for="pax-in-group">Pax in Group</label>
+                  <input type="number" id="pax-in-group" class="form-control" placeholder="Enter number of passengers in group" />
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group focused">
+                  <label class="form-control-label" for="passenger-name-1">Passenger Name 1</label>
+                  <input type="text" id="passenger-name-1" class="form-control" placeholder="Enter passenger's name" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <h6 class="p-b-10 border-b">Allowances</h6>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group focused">
+                  <label class="form-control-label" for="allowance-type">Allowance Type</label>
+                  <select id="allowance-type" class="form-control">
+                    <option value="">Select Type</option>
+                    <option value="Luggage">Luggage</option>
+                    <option value="Food">Food</option>
+                    <option value="Beverages">Beverages</option>
+                    <!-- Add more allowance types as needed -->
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group focused">
+                  <label class="form-control-label" for="pax">PAX</label>
+                  <input type="number" id="pax" class="form-control" placeholder="Enter PAX" />
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group focused">
+                  <label class="form-control-label" for="quantity">Quantity</label>
+                  <input type="number" id="quantity" class="form-control" placeholder="Enter quantity" />
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group focused">
+                  <label class="form-control-label" for="amount">Amount</label>
+                  <input type="number" id="amount" class="form-control" placeholder="Enter amount" />
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group focused">
+                  <label class="form-control-label" for="total">Total</label>
+                  <input type="number" id="total" class="form-control" placeholder="Enter total" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="table-responsive">
+                  <table class="table white-space">
+                    <thead>
+                      <tr>
+                        <th scope="col">Type</th>
+                        <th scope="col">Pax</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Total</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">Hotel Room</th>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>$200/night</td>
+                        <td>$200</td>
+                        <td>
+                          <div ngbDropdown container="body">
+                            <button type="button" class="btn btn-sm border-0 text-dark" ngbDropdownToggle>
+                              <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                            </button>
+                            <div ngbDropdownMenu>
+                              <button ngbDropdownItem>
+                                <i class="feather icon-edit"></i>
+                                Edit
+                              </button>
+                              <button ngbDropdownItem>
+                                <i class="feather icon-trash-2"></i>
+                                Delete
+                              </button>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Hotel Room</th>
+                        <td>3</td>
+                        <td>1</td>
+                        <td>$250/night</td>
+                        <td>$250</td>
+                        <td>
+                          <div ngbDropdown container="body">
+                            <button type="button" class="btn btn-sm border-0 text-dark" ngbDropdownToggle>
+                              <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                            </button>
+                            <div ngbDropdownMenu>
+                              <button ngbDropdownItem>
+                                <i class="feather icon-edit"></i>
+                                Edit
+                              </button>
+                              <button ngbDropdownItem>
+                                <i class="feather icon-trash-2"></i>
+                                Delete
+                              </button>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Hotel Room</th>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>$180/night</td>
+                        <td>$180</td>
+                        <td>
+                          <div ngbDropdown container="body">
+                            <button type="button" class="btn btn-sm border-0 text-dark" ngbDropdownToggle>
+                              <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                            </button>
+                            <div ngbDropdownMenu>
+                              <button ngbDropdownItem>
+                                <i class="feather icon-edit"></i>
+                                Edit
+                              </button>
+                              <button ngbDropdownItem>
+                                <i class="feather icon-trash-2"></i>
+                                Delete
+                              </button>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Hotel Room</th>
+                        <td>4</td>
+                        <td>1</td>
+                        <td>$300/night</td>
+                        <td>$300</td>
+                        <td>
+                          <div ngbDropdown container="body">
+                            <button type="button" class="btn btn-sm border-0 text-dark" ngbDropdownToggle>
+                              <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                            </button>
+                            <div ngbDropdownMenu>
+                              <button ngbDropdownItem>
+                                <i class="feather icon-edit"></i>
+                                Edit
+                              </button>
+                              <button ngbDropdownItem>
+                                <i class="feather icon-trash-2"></i>
+                                Delete
+                              </button>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-end gap-2">
+            <button class="btn btn-secondary" (click)="prevStep()"><i class="feather icon-arrow-left"></i> Back</button>
+            <button class="btn btn-primary" (click)="nextStep()">Next <i class="feather icon-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <div *ngIf="currentStep === 3">
+          <div class="col-12">
+            <h6 class="p-b-10 border-b">Final Review and Confirmation</h6>
+          </div>
+          <div class="h-280">
+            <div class="d-flex justify-content-between w-100 mb-4">
+              <h5 class="f-w-600 w-50">Accomodation Requested for:</h5>
+              <div>
+                <p class="mb-2">easyjet Airline Company Limited (Portugal DP)</p>
+                <div class="detail">
+                  <span class="label">Address:</span>
+                  <span class="value ms-2">
+                    Invoice Billing Details: easyJet Airline Company Limited (Portugal DP) PT980467101 Terminal 2, Aeroporto Lisboa, Lisbon
+                    1700-111, Portugal
+                  </span>
+                </div>
+              </div>
+            </div>
+            <!-- General Details -->
+            <div class="mb-4">
+              <h5 class="border-bottom pb-2">General Details</h5>
+              <div class="room-charge-details">
+                <div class="detail">
+                  <span class="label">Reservation number:</span>
+                  <span class="value">VC4971</span>
+                </div>
+                <div class="detail">
+                  <span class="label">Reservation requested by:</span>
+                  <span class="value">CS(airline employee)</span>
+                </div>
+                <div class="detail">
+                  <span class="label">Port:</span>
+                  <span class="value">JFK</span>
+                </div>
+              </div>
+            </div>
+            <div class="mb-4">
+              <h5 class="border-bottom pb-2">Accommodation & Transport Allowances</h5>
+              <div class="room-charge-details">
+                <div class="detail">
+                  <span class="label">Total People in Group:</span>
+                  <span class="value">5 People</span>
+                </div>
+                <div class="detail">
+                  <span class="label">Number of Rooms:</span>
+                  <span class="value">3 Rooms</span>
+                </div>
+                <div class="detail">
+                  <span class="label">Number of Nights:</span>
+                  <span class="value">4 Night</span>
+                </div>
+                <div class="detail">
+                  <span class="label">Room Charge per Night:</span>
+                  <span class="value">220 EUR</span>
+                </div>
+              </div>
+              <div class="d-flex w-100 align-items-center gap-3">
+                <span class="label">Total Room Charge:</span>
+                <span class="value total-amount">450 EUR</span>
+              </div>
+            </div>
+            <!-- Accommodation & Transport Allowances -->
+            <div class="mb-4">
+              <!-- Hotel Details -->
+              <h5 class="border-bottom pb-2">Hotel Details</h5>
+              <table class="table table-bordered table-striped mt-2">
+                <thead class="table-light">
+                  <tr>
+                    <th>Hotel Name</th>
+                    <th>Nights</th>
+                    <th>Rooms</th>
+                    <th>Rates</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Hotel California</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>$150 per night</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- Allowances -->
+              <h4 class="mt-4">Allowances</h4>
+              <div class="room-charge-details">
+                <div class="detail">
+                  <span class="label">Allowance per breakfast:</span>
+                  <span class="value">10</span>
+                </div>
+                <div class="detail">
+                  <span class="label">Number of Breakfast:</span>
+                  <span class="value">2</span>
+                </div>
+              </div>
+              <div class="d-flex w-100 align-items-center gap-3">
+                <span class="label">Total Allowance from Creakfast:</span>
+                <span class="value total-amount">20 EUR</span>
+              </div>
+              <!-- <table class="table table-bordered table-striped mt-2">
+                  <thead class="table-light">
+                    <tr>
+                      <th>Type</th>
+                      <th>Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Transport Allowance</td>
+                      <td>$100</td>
+                    </tr>
+                    <tr>
+                      <td>Meal Allowance</td>
+                      <td>$50</td>
+                    </tr>
+                  </tbody>
+                </table> -->
+
+              <!-- Grand Total -->
+              <div class="mt-4">
+                <h4 class="text-end">
+                  Grand Total:
+                  <span class="text-primary">$650</span>
+                </h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-end gap-2">
+            <button class="btn btn-secondary" (click)="prevStep()">Back</button>
+            <button class="btn btn-primary" (click)="finish()">Finish</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="modal-footer">
+      <button type="button" class="btn btn-light border-gray" (click)="modal.close('Close click')">Close</button>
+      <button class="btn btn-primary">Next</button>
+    </div> -->
+</ng-template>
+
+<ng-template #selectHotel let-modal>
+  <div class="modal-header pt-3 pb-3">
+    <h5 class="modal-title">Select Hotel</h5>
+    <button type="button" class="btn-close border-0" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <div class="d-flex flex-sm-row flex-column justify-content-between align-items-center mb-2">
+      <div class="d-flex justify-content-center align-items-center">
+        <p class="mb-0">Show</p>
+        <select class="form-control wid-80 mx-2">
+          <option value="">10</option>
+          <option value="">25</option>
+          <option value="">50</option>
+          <option value="">100</option>
+        </select>
+        <p class="mb-0">entries</p>
+      </div>
+      <div class="w-25 mobile mt-2 mt-md-0">
+        <input type="text" placeholder="Search" class="form-control" />
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="table white-space">
+        <thead>
+          <tr>
+            <th scope="col">
+              <div class="">
+                <input class="form-check-input" type="checkbox" />
+              </div>
+            </th>
+            <th scope="col">Hotel Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Address</th>
+            <th scope="col">Total Rooms</th>
+            <th scope="col">Rating</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <div class="">
+              <input class="form-check-input" type="checkbox" />
+            </div>
+            <th scope="row">Hilton</th>
+            <td>$200/night</td>
+            <td>123 Main Street, City</td>
+            <td>100</td>
+            <td>4.5</td>
+            <td>
+              <div ngbDropdown container="body">
+                <button type="button" class="btn btn-sm border-0 text-dark" ngbDropdownToggle>
+                  <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                </button>
+                <div ngbDropdownMenu>
+                  <button ngbDropdownItem>
+                    <i class="feather icon-edit"></i>
+                    Edit
+                  </button>
+                  <button ngbDropdownItem>
+                    <i class="feather icon-trash-2"></i>
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <div class="">
+              <input class="form-check-input" type="checkbox" />
+            </div>
+            <th scope="row">Marriott</th>
+            <td>$250/night</td>
+            <td>456 Elm Street, City</td>
+            <td>150</td>
+            <td>4.7</td>
+            <td>
+              <div ngbDropdown container="body">
+                <button type="button" class="btn btn-sm border-0 text-dark" ngbDropdownToggle>
+                  <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                </button>
+                <div ngbDropdownMenu>
+                  <button ngbDropdownItem>
+                    <i class="feather icon-edit"></i>
+                    Edit
+                  </button>
+                  <button ngbDropdownItem>
+                    <i class="feather icon-trash-2"></i>
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <div class="">
+              <input class="form-check-input" type="checkbox" />
+            </div>
+            <th scope="row">Hyatt</th>
+            <td>$180/night</td>
+            <td>789 Pine Avenue, City</td>
+            <td>120</td>
+            <td>4.3</td>
+            <td>
+              <div ngbDropdown container="body">
+                <button type="button" class="btn btn-sm border-0 text-dark" ngbDropdownToggle>
+                  <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                </button>
+                <div ngbDropdownMenu>
+                  <button ngbDropdownItem>
+                    <i class="feather icon-edit"></i>
+                    Edit
+                  </button>
+                  <button ngbDropdownItem>
+                    <i class="feather icon-trash-2"></i>
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <div class="">
+              <input class="form-check-input" type="checkbox" />
+            </div>
+            <th scope="row">Ritz-Carlton</th>
+            <td>$300/night</td>
+            <td>101 Ocean Drive, City</td>
+            <td>200</td>
+            <td>4.8</td>
+            <td>
+              <div ngbDropdown container="body">
+                <button type="button" class="btn btn-sm border-0 text-dark" ngbDropdownToggle>
+                  <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                </button>
+                <div ngbDropdownMenu>
+                  <button ngbDropdownItem>
+                    <i class="feather icon-edit"></i>
+                    Edit
+                  </button>
+                  <button ngbDropdownItem>
+                    <i class="feather icon-trash-2"></i>
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light border-gray" (click)="modal.close('Close click')">Close</button>
+    <button class="btn btn-primary">Save</button>
+  </div>
+</ng-template>

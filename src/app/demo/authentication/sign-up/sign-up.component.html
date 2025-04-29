@@ -1,0 +1,43 @@
+<!-- Start design for login-v2 -->
+
+<div class="hero align-items-center justify-content-center min-vh-100 d-flex"
+  style="background-image: url(assets/images/loginbg.jpg);">
+
+  <div class="container">
+    <div class="">
+      <div class="wid-login">
+        <div class="logo text-center">
+          <img src="assets/images/text-logo.svg" class="img-fluid login-logo-sec">
+        </div>
+        <h3 class="mb-3 f-w-400 mt-4">Two-Step Verification</h3>
+        <div class="form-group">
+          <p class="f-s-14">
+            To ensure your account is secure, we've sent a verification code to your registered email or phone.
+            Please enter the code below to proceed.
+          </p>
+        </div>
+        <div class="form-group">
+          <form [formGroup]="verificationForm">
+            <label for="exampleInputEmail1">Verification Code<small class="text-danger">*</small></label>
+            <input type="email" class="form-control p-t-b-10 rounded-0" id="exampleInputEmail1"
+              aria-describedby="emailHelp" placeholder="Enter Verification Code" formControlName="code">
+              <div class="text-danger">
+                <small *ngIf="verificationForm.controls['code'].touched && verificationForm.controls['code'].errors?.['required']">
+                  Verification code is required.
+                </small>
+              </div>
+          </form>
+        </div>
+        <div class="d-grid">
+          <!-- [routerLink]="['/website/dashboard']" -->
+          <button class="btn btn-block theme-btn mb-0" (click)="handleVerify()">Verify</button>
+        </div>
+        <div class="d-grid">
+          <button class="btn btn-block theme-btn-outline mb-0 mt-3" (click)="handleResend()" >Resend</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- End design for login-v2 -->

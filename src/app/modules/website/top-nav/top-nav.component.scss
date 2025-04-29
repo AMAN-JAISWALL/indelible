@@ -1,0 +1,149 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px 20px;
+  }
+  
+  .logo img {
+    height: 42px;
+  }
+  
+  .nav-links {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+  }
+  
+  .nav-links li {
+    margin: 0 5px;
+  }
+  
+  .nav-links li a {
+    color: #54595f;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .nav-links li a:hover {
+    
+    color: #283D53;
+  }
+  
+  .buttons {
+    display: flex;
+  }
+  
+  .login-btn, .signup-btn {
+    background-color: transparent;
+    border: 1px solid #283D53;
+    color: #283D53;
+    padding: 6px 16px;
+    margin-left: 10px;
+    border-radius: 0px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .login-btn:hover, .signup-btn:hover {
+    background-color: white;
+    color: #333;
+    
+  }
+  
+  .signup-btn {
+    background-color: white;
+    color: #333;
+    border: 1px solid white;
+  }
+  
+  .signup-btn:hover {
+    background-color: transparent;
+    color: white;
+  }
+  
+  /* Toggle Menu Icon for smaller screens */
+  .menu-icon {
+    display: none;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  #toggle-menu {
+    display: none;
+  }
+  .navbar .nav-links li a:hover {
+    color: #283D53;
+
+  }
+  
+  .navbar .nav-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    list-style: none;
+   
+    padding: 10px 5px;
+    width: 200px;
+  }
+  
+  .navbar .dropdown:hover .nav-dropdown-menu {
+    display: block;
+  }
+  
+  .navbar .nav-dropdown-menu li a {
+    padding: 10px;
+    display: block;
+    text-align: left;
+  }
+  
+  .navbar .nav-dropdown-menu li a:hover {
+    color: #283D53;
+  }
+  
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      position: absolute;
+      top: 66px;
+      left: 0;
+      background-color: #283D53;
+      z-index: 1;
+    }
+  
+    .nav-links li {
+      text-align: center;
+      margin: 20px 0;
+    }
+  
+    .nav-links li a {
+      font-size: 14px;
+    }
+  
+    #toggle-menu:checked + .menu-icon + .nav-links {
+      display: flex;
+    }
+  
+    .menu-icon {
+      display: block;
+    }
+  }
+  

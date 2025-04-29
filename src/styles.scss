@@ -1,0 +1,198 @@
+/* You can add global styles to this file, and also import other style files */
+
+/**======================================================================
+=========================================================================
+Template Name: Gradient Able Admin Template
+Author: Codedscss/themes
+supports: https://codedscss/themes.com/submit-ticket/
+File: style.css
+=========================================================================
+=========================================================================
+  == Table of Contents==
+	- Generic classes
+		-	Margin, Padding, Font class, text align, position, floating, overflow, background class, text color, display class, boarder class
+	- Theme Elements
+		-	Accordion, Button, tabs, typography, buttons, box shadow, Lable & Badges, Alert, Pagination, Breadcumb, Cards, Collapse,
+        -   Carousel, Grid, Progress, Model, tooltip, popover, Datepicker, Gridstack, lightbox, notification, Nestable, pnotify, rating,
+        -   Rangeslider, Slider, Syntax Highlighter, Tour, Treeview, Toolbar, Session Timeout, Session idle Timeout, offline, Animation
+    - Forms
+        -   Forms Elements, Advance Form Control, Validation, Masking, Wizard, Picker, Select
+	- Pages
+		-   authentication, Maintenance, Maps, Landing page messages, task, Todo, Notes, Charts, Icons, Gallery, Editors,
+        -   Invoice, Full Calender, File Upload,
+=================================================================================
+=================================================================================== */
+
+// Theme Font
+@import 'scss/themes/font/theme-font';
+
+// main framework
+@import 'node_modules/bootstrap/scss/functions';
+@import 'node_modules/bootstrap/scss/variables';
+@import 'scss/settings/custom-variables';
+@import 'scss/settings/theme-variables';
+
+// bootstrap
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap/scss/mixins';
+@import 'node_modules/bootstrap/scss/utilities';
+@import 'node_modules/bootstrap/scss/utilities/api';
+@import '../node_modules/bootstrap/dist/css/bootstrap.css';
+@import 'scss/themes/general';
+@import 'scss/themes/generic';
+@import 'scss/themes/minixs/function';
+
+// icon
+@import 'scss/themes/font/datta-icon';
+@import 'scss/themes/font/feather';
+@import 'scss/themes/font/fontawesome';
+@import 'scss/themes/font/flaticon';
+
+// component
+@import 'scss/themes/component/component';
+
+// theme layouts
+@import 'scss/themes/layouts/menu-lite';
+@import 'scss/themes/layouts/menu-ng';
+
+// dashboard
+@import 'scss/themes/pages/dashboard.scss';
+@import 'scss/themes/pages/authentication';
+
+@import 'scss/themes/chat/chat';
+
+// custom
+@import 'scss/themes/custom';
+
+// regular style toast
+@import 'ngx-toastr/toastr';
+
+.h-fit{
+  height: fit-content;
+}
+.text-primary-dark{
+  color: #283d53;
+}
+.badge-success {
+  background-color: #6ec1e4;
+  color: #ffffff;
+}
+.badge-primary {
+  background-color: #283d53;
+  color: #ffffff;
+}
+.h-430 {
+  max-height: 430px ;
+  overflow-y: auto;
+}
+.h-500 {
+  max-height:calc(100dvh - 11rem);;
+  overflow-y: auto;
+}
+.h-responsive{
+  height:calc(100dvh - 20rem);;
+  overflow-y: auto;
+}
+.h-280 {
+  max-height: 238px ;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.text-skyblue{
+  color: #6ec1e4;
+}
+.badeg-total{
+  background: cornsilk;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  padding: 0 5px;
+font-size: 10px;
+}
+.theme-btn-outline{
+  color: #0d213a;
+  background-color: #fff;
+  border-color: #0d213a;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #0D213A;
+  border-radius: 0px 0px 0px 0px;
+  padding: 10px 50px 10px 50px;
+  text-transform: uppercase;
+  letter-spacing: 5.6px;
+}
+.theme-btn-outline:hover, .theme-btn-outline:active, .theme-btn-outline:focus {
+  color: #fff;
+  background-color: #0d213a;
+ 
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #0D213A;
+  border-radius: 0px 0px 0px 0px;
+  padding: 10px 50px 10px 50px;
+  text-transform: uppercase;
+  letter-spacing: 5.6px;
+}
+
+.badge-danger{
+  background-color: rgb(243, 63, 96);
+}
+
+@media (min-width: 1200px) {
+  .custom-modal.modal-dialog.modal-dialog-centered.modal-xl {
+    min-width: 90vw !important;
+}
+.px-6rem{
+  padding: 0 5.3rem;
+}
+}
+
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-height: calc(100vh - 18rem);
+  overflow-y: scroll;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+  background-color: #b0b0b0;
+  border-radius: 10px;
+  border: 3px solid #9e9e9e;
+}
+
+
+
+
+.md-drppicker .btn.btn-default {
+  border: 1px solid #c4c4c4 !important;
+  color: #37474f !important;
+  background-color: #f8f9fa !important;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+.md-drppicker .clear svg {
+  display: none !important;
+}
+.md-drppicker .ranges ul li button.active {
+  background-color: #6ec1e4 !important;
+  color: #fff;
+}
+.md-drppicker {
+  font-family: poppins, sans-serif !important;
+}
+
+.md-drppicker td.active,
+.md-drppicker td.active:hover {
+  background-color: #6ec1e4 !important;
+}
+
+.md-drppicker .btn{
+  background-color: #6ec1e4 !important;
+}
+.buttons_input .md-drppicker .btn:hover:first-child{
+  background-color: #f5f5f5 !important;
+  border: #537585 !important;
+}
+.md-drppicker .btn:hover:last-child{
+  background-color: #537585 !important;
+  border: #537585 !important;
+}

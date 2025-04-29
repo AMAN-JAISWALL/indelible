@@ -1,0 +1,80 @@
+.login-logo{
+    width: 210px;
+}
+.verticle-border{
+    height: 300px;
+    width: 1px;
+    background-color: #283D53;
+    margin: 0px auto;
+}
+h3{
+    font-size: 20px;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-style: normal;
+    text-decoration: none;
+    letter-spacing: 3.6px;
+}
+.form-group label {
+    font-size: 14px;
+    font-weight: 400;
+}
+.p-t-b-10{
+    padding: 10px 15px;
+}
+.checkbox.checkbox-primary input[type=checkbox]:checked + .cr:before {
+    background: #283d53;
+    border-color: #283d53;
+    color: #ffffff;
+}
+.p-15{
+    padding: 14px;
+}
+
+
+
+.wid-login{
+    width: 400px;
+    margin: 0px auto;
+    background: #F6F7FB;
+    padding: 4% 3%;
+    border-radius: 15px;
+}
+.login-logo-sec{
+    width: 190px;
+}
+.bg-pull {
+    background-image: url(https://designs.itsabacus.net/mobel-img/bg-pull-2.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.hero{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 123;
+}
+.hero:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.34);
+    z-index: -1;
+}
+
+.passwordEyesElem{
+    cursor: pointer;
+}
+
+// media 
+@media only screen and (max-width: 767px){
+    .wid-login{
+        width: 100%;
+        padding: 8% 6%;
+    }
+}

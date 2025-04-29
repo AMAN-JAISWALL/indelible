@@ -1,0 +1,1033 @@
+<section class="feature_product_area section_gap_bottom_custom mb-25">
+  <div class="container-fluid py-3 px-md-5 px-2">
+    <div class="d-flex justify-content-between align-items-center m-b-10">
+      <h5 class="ng-star-inserted">Hotels</h5>
+      <div class="d-flex gap-2 align-items-center">
+        <button (click)="openAddHotel(hotelAddEdit)" type="button" class="btn btn-primary px-3">
+          <i class="feather icon-plus"></i>
+          Add Hotel
+        </button>
+        <button (click)="openSendEmail(sendemail)" type="button" class="btn btn-primary px-3">
+          <i class="feather icon-arrow-up-right"></i>
+          Send Email
+        </button>
+      </div>
+    </div>
+    <div class="card mb-3">
+      <div class="card-body card-body py-2 px-3">
+        <div class="row" [formGroup]="hotelPortSearchForm">
+          <div class="col-md-3">
+            <div class="form-group mb-md-0">
+              <label for="time-period">Port</label>
+              <select id="time-period" class="form-control ng-untouched ng-pristine ng-valid" formControlName="port"
+                (change)="portOnChange($event)">
+                <option [ngValue]="null">Select Port</option>
+                <option *ngFor="let data of getAllPortsData" [value]="data.portid">{{ data.portcode }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group mb-md-0">
+              <label for="time-period">Hotel Name</label>
+              <input type="text" placeholder=" Enter hotel name" class="form-control" formControlName="search"
+                (input)="onInputSearchByHotelName($event)" />
+            </div>
+          </div>
+          <div class="col-md-auto d-flex align-items-end gap-2">
+            <button class="btn btn-primary" (click)="handlePortSearch()"><i class="fa fa-check"></i></button>
+            <button class="btn btn-primary" (click)="resetPortSearch()"><i
+                class="feather icon-refresh-ccw"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="row w-100 m-0 card">
+        <!-- Property 1 -->
+
+
+        <div class="col-lg-12 p-0">
+
+          <ng-container *ngIf="isLoading1; else hotelDetails">
+            <div *ngFor="let data of [1, 2, 3, 4]" class="row w-100 m-0 p-2 border-b mt-2">
+              <div class="col-md-6 order-2 order-md-1 p-0">
+                <!-- Shimmer for contract rate, hotel name, and hotel ID -->
+                <h5 class="text-dark d-flex gap-3 mt-2 m-md-0 f-16">
+                  <div class="shimmer-loader" [ngStyle]="{width: '80px', height: '20px'}"></div>
+                  <div class="shimmer-loader" [ngStyle]="{width: '150px', height: '20px'}"></div>
+                  <div class="shimmer-loader" [ngStyle]="{width: '60px', height: '20px'}"></div>
+                </h5>
+
+                <div class="d-flex flex-sm-row flex-column gap-3">
+                  <div class="d-flex flex-row flex-sm-column mt-1">
+                    <span class="shimmer-loader" [ngStyle]="{width: '80px', height: '20px'}"></span>
+                  </div>
+
+                  <div>
+                    <p class="shimmer-loader mt-1" [ngStyle]="{width: '300px', height: '20px'}"></p>
+                    <div class="d-flex align-items-center gap-2">
+                      <p class="shimmer-loader" [ngStyle]="{width: '180px', height: '15px'}"></p>
+                      <p class="shimmer-loader" [ngStyle]="{width: '180px', height: '15px'}"></p>
+                      <p class="shimmer-loader" [ngStyle]="{width: '100px', height: '15px'}"></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 order-2 p-0 note-box">
+                <div class="shimmer-loader" [ngStyle]="{width: '100%', height: '40px'}"></div>
+              </div>
+              <div class="col-md-3 order-1 order-md-3 p-0">
+                <div class="d-flex align-items-center gap-2 justify-content-center justify-content-md-end">
+                  <span class="shimmer-loader" [ngStyle]="{width: '40px', height: '40px', borderRadius: '50%'}"></span>
+                  <span class="shimmer-loader" [ngStyle]="{width: '40px', height: '40px', borderRadius: '50%'}"></span>
+                  <span class="shimmer-loader" [ngStyle]="{width: '40px', height: '40px', borderRadius: '50%'}"></span>
+                  <span class="shimmer-loader" [ngStyle]="{width: '40px', height: '40px', borderRadius: '50%'}"></span>
+                  <span class="shimmer-loader" [ngStyle]="{width: '40px', height: '40px', borderRadius: '50%'}"></span>
+                </div>
+                <div class="d-flex gap-2 justify-content-center justify-content-md-end mt-2">
+                  <span class="shimmer-loader" [ngStyle]="{width: '80px', height: '20px'}"></span>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+          <ng-template #hotelDetails>
+            <ng-container *ngIf="getHotelsData.length > 0; else noData">
+              <div *ngFor="let data of getHotelsData">
+                <div class="row w-100 m-0 p-2 border-b">
+                  <div class="col-md-7 order-2 order-md-1 p-0 d-flex flex-sm-row flex-column gap-2">
+                    <div>
+                      <div class="h6 mb-1 ms-0"><span class="f-16 fw-bold text-skyblue">€{{data.contract_rate || "0.00"
+                          }}</span>
+                      </div>
+                      <div class="d-flex flex-row flex-sm-column">
+                        <span class="text-warning f-14">
+                          <!-- <ngb-rating [(rate)]="rating" [max]="5" /> -->
+                          <ngb-rating [rate]="data.stars || 0" [max]="5" [readonly]="true" />
+                        </span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h5 class="text-dark d-flex gap-2 mt-2 m-md-0 f-16">
+                        {{ data.hotel_name || "N/A" }}
+                        <span class="badge text-dark border h-fit">
+                          <span class="f-w-600">ID:</span>
+                          #H000{{data.hotel_id || "N/A"}}
+                        </span>
+
+                        <span class="badge badge-success small-badge" 
+                        [ngClass]="{'badge-success': data.status === 'Active',
+                          'badge-danger': data.status === 'Inactive'}">
+                          {{data.status || "N/A"}}
+                        </span>
+
+                      </h5>
+                      <div class="d-flex flex-sm-row flex-column gap-3">
+                        <div>
+                          <p class="mb-1 fw-normal f-14">
+                            <i class="feather icon-map-pin"></i>
+                            {{data.address || "N/A"}}, {{data.city || "N/A"}}, {{data.country || "N/A"}},
+                            {{data.postcode || "N/A"}}
+                          </p>
+                          <div class="d-flex align-items-center gap-2">
+                            <p class="mb-0 primary-secondary fw-normal f-12">
+                              <i class="feather icon-phone-call"></i>
+                              {{data.telephone || "N/A"}}
+                            </p>
+                            <p class="mb-0 primary-secondary fw-normal f-12">
+                              <i class="feather icon-mail"></i>
+                              {{data.email || "N/A"}}
+                            </p>
+                            <p class="mb-0 badeg-total">
+                              <i class="feather icon-home"></i>
+                              Total Rooms: {{data.total_rooms || "N/A"}}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="col-md-3 order-2 p-0 note-box">{{data.comment || "N/A"}}
+                  </div>
+                  <div class="col-md-2 order-1 order-md-3 p-0">
+                    <div class="d-flex align-items-center gap-2 justify-content-center justify-content-md-end">
+                      <span  [ngClass]="{'disabled_custom_class': data.status === 'Inactive'}"  (click)="openAddHotelAvailability(hotelavailability,data)" class="circle-icon"
+                        placement="top" ngbTooltip="Hotel availability">
+                        <i class="feather icon-edit"></i>
+                      </span>
+                      <span  [ngClass]="{'disabled_custom_class': data.status === 'Inactive'}"  (click)="openGetHotelAvailability(getHotelAvailability,data)" class="circle-icon"
+                        placement="top" ngbTooltip="Hotel History">
+                        <i class="feather icon-info"></i>
+                      </span>
+                      <span   [ngClass]="{'disabled_custom_class': data.status === 'Inactive'}" (click)="openHotelNoteEdit(hotelnoteedit,data)" class="circle-icon position-relative"
+                        placement="top" ngbTooltip="Edit message">
+                        <i class="feather icon-mail"></i>
+                      </span>
+                      <span  [ngClass]="{'disabled_custom_class': data.status === 'Inactive'}"  (click)="openHotelAction(hotelaction,data)" class="circle-icon" placement="top"
+                        ngbTooltip="Hotel action">
+                        <i class="feather icon-info"></i>
+                      </span>
+                      <span  [ngClass]="{'disabled_custom_class': data.status === 'Inactive'}"  (click)="handleHotelEdit(hotelAddEdit,data)" class="circle-icon" placement="top"
+                        ngbTooltip="Edit hotel details">
+                        <i class="feather icon-credit-card"></i>
+                      </span>
+
+                      <span (click)="handleHotelStatus(conformationBox,data)" class="circle-icon" placement="top"
+                        ngbTooltip="Status">
+                        
+
+                        <i class="feather text-gray-400" 
+                        [ngClass]="{
+                          'icon-x-circle': data.status === 'Active',
+                          'icon-check-circle': data.status === 'Inactive'}" ></i>
+                        <!-- <i class="feather  text-gray-400" ></i> -->
+                      </span>
+
+                    </div>
+                    <div class="d-flex gap-2 justify-content-center justify-content-md-end mt-2">
+                      <span class="d-flex gap-1 align-items-end">
+                        <p class="m-0 f-16 f-w-600">{{data.room || "N/A"}}</p>
+                        <p class="m-0 f-10">rooms</p>
+                        <!-- <span class="text-primary-dark f-10">
+                          <i class="feather icon-clock ms-2 me-1"></i>
+                          {{ data.historyDate || "N/A" }}
+                        </span> -->
+                        <span class="text-primary-dark f-10">
+                          <i class="feather icon-clock ms-2 me-1"></i>
+                          {{ data.historyDate ? (data.historyDate | date: 'dd-MMM-yyyy, h:mm a') : "N/A" }}
+                        </span>
+                        
+
+                        <!-- <p class="m-0 f-10 text-primary">{{ data.status || "N/A" }}</p> -->
+                        
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+
+            <ng-template #noData>
+              <p class="text-danger text-center mt-2">No Data Found.</p>
+            </ng-template>
+
+          </ng-template>
+        </div>
+
+        <!-- Property 2 -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #addhotel let-modal>
+  <div class="modal-header pt-3 pb-3">
+    <h5 class="modal-title">Add Hotel</h5>
+    <button type="button" class="btn-close border-0" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body h-430">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="name">Name</label>
+          <input type="text" id="name" class="form-control" placeholder="Enter hotel name" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="address">Address</label>
+          <input type="text" id="address" class="form-control" placeholder="Enter hotel address" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="telephone">Telephone</label>
+          <input type="text" id="telephone" class="form-control" placeholder="Enter telephone number" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="email">Email</label>
+          <input type="email" id="email" class="form-control" placeholder="Enter email address" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="contracted-rate">Contracted Rate</label>
+          <select id="contracted-rate" class="form-control">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="contract-rate">Contract Rate</label>
+          <input type="number" id="contract-rate" class="form-control" placeholder="Enter contract rate" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="main-contact-person">Main Contact Person</label>
+          <input type="text" id="main-contact-person" class="form-control"
+            placeholder="Enter main contact person name" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="main-contact-email">Main Contact Person Email</label>
+          <input type="email" id="main-contact-email" class="form-control"
+            placeholder="Enter main contact person email" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="finance-person">Finance Person</label>
+          <input type="text" id="finance-person" class="form-control" placeholder="Enter finance person name" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="finance-email">Finance Person Email</label>
+          <input type="email" id="finance-email" class="form-control" placeholder="Enter finance person email" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="currency">Currency</label>
+          <select id="currency" class="form-control">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="INR">INR</option>
+            <option value="AUD">AUD</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="total-rooms">Total of Rooms</label>
+          <input type="number" id="total-rooms" class="form-control" placeholder="Enter total number of rooms" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="stars">Stars</label>
+          <input type="number" id="stars" class="form-control" placeholder="Enter hotel stars" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="pet-friendly">Pet Friendly</label>
+          <select id="pet-friendly" class="form-control">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="pet-allowance">Pet Allowance (Rate)</label>
+          <input type="number" id="pet-allowance" class="form-control" placeholder="Enter pet allowance rate" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="restaurant">Restaurant</label>
+          <select id="restaurant" class="form-control">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="dinner-rate">Dinner Rate</label>
+          <input type="number" id="dinner-rate" class="form-control" placeholder="Enter dinner rate" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="breakfast-rate">Breakfast Rate</label>
+          <input type="number" id="breakfast-rate" class="form-control" placeholder="Enter breakfast rate" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light border-gray" (click)="modal.close('Close click')">Close</button>
+    <button class="btn btn-primary">Save</button>
+  </div>
+</ng-template>
+
+<ng-template #sendemail let-modal>
+  <div class="modal-header pt-3 pb-3">
+    <h5 class="modal-title">List of Templates</h5>
+    <button type="button" class="btn-close border-0" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <h6>1.Hotel Availability Template</h6>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light border-gray" (click)="modal.close('Close click')">Close</button>
+    <button class="btn btn-primary">Save</button>
+  </div>
+</ng-template>
+
+<ng-template #hotelavailability let-modal>
+  <div class="modal-header pt-3 pb-3">
+    <h5 class="modal-title">Hotel Availability for {{hotelAvailabilityHeading || "N/A" }}</h5>
+    <button type="button" class="btn-close border-0" aria-label="Close"
+      (click)="modal.dismiss('Cross click'); handleHotelAvailabilityFormReset();"></button>
+  </div>
+  <div class="modal-body" [formGroup]="hotelAvailabilityForm">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group focused">
+          <label class="form-control-label" for="rooms">Rooms<small class="text-danger">*</small></label>
+          <input type="number" id="rooms" class="form-control" placeholder="Enter room" formControlName="rooms" />
+          <div class="text-danger">
+            <small
+              *ngIf="hotelAvailabilityForm.controls['rooms'].touched && hotelAvailabilityForm.controls['rooms'].errors?.['required']">
+              Room is required.
+            </small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group focused">
+          <label class="form-control-label" for="rooms">Message<small class="text-danger">*</small></label>
+          <textarea name="" id="" class="form-control" row="3" placeholder="Enter message"
+            formControlName="message"></textarea>
+          <div class="text-danger">
+            <small
+              *ngIf="hotelAvailabilityForm.controls['message'].touched && hotelAvailabilityForm.controls['message'].errors?.['required']">
+              Message is required.
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light border-gray"
+      (click)="modal.close('Close click');handleHotelAvailabilityFormReset()">Close</button>
+    <button class="btn btn-primary" (click)="handleHotelAvailabilitySave()">
+      <span *ngIf="!isHotelAvailabilitySaving">Save</span>
+      <span *ngIf="isHotelAvailabilitySaving">Saving..</span>
+      <span *ngIf="isHotelAvailabilitySaving" class="spinner-border spinner-border-sm" role="status"
+        aria-hidden="true"></span>
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #getHotelAvailability let-modal>
+  <div class="modal-header pt-3 pb-3">
+    <h5 class="modal-title">Hotel History for {{openGetHotelAvailabilityHeading || "N/A"}} </h5>
+    <button type="button" class="btn-close border-0" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <div class="table-responsive">
+      <table class="table white-space">
+        <thead>
+          <tr>
+            <th scope="col">Room</th>
+            <th scope="col">Comment</th>
+            <th scope="col">User</th>
+            <th scope="col">Datetime</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngIf="getHotelAvailabilityData?.length; else noAvailabilityData">
+            <tr *ngFor="let data of getHotelAvailabilityData">
+              <td>{{ data?.roomId || '-' }}</td>
+              <td>{{ data?.comment || 'N/A' }}</td>
+              <td>{{ data?.createdByName || 'N/A' }}</td>
+              <td>{{ data?.historyDate ? (data.historyDate | date: 'yyyy-MM-dd hh:mm a') : 'N/A' }}</td>
+            </tr>
+          </ng-container>
+          <ng-template #noAvailabilityData>
+            <tr>
+              <td colspan="4" class="text-center">No data available</td>
+            </tr>
+          </ng-template>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light border-gray" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
+
+<ng-template #hotelaction let-modal>
+  <div class="modal-header pt-3 pb-3">
+    <h5 class="modal-title">History of action performed on {{getActionListHeading || "N/A"}}</h5>
+    <button type="button" class="btn-close border-0" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <div class="table-responsive">
+      <table class="table white-space">
+        <thead>
+          <tr>
+            <th scope="col">Action</th>
+            <th scope="col">User</th>
+            <th scope="col">Date/Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngIf="getHotelActivityListData?.length; else noData">
+            <tr *ngFor="let data of getHotelActivityListData">
+              <td>{{data.activity || "N/A"}}</td>
+              <td>{{ (data.firstname || "N/A") + ' ' + (data.lastname || "N/A") }}</td>
+              <td>{{ data?.activityDate ? (data.activityDate | date: 'yyyy-MM-dd hh:mm a') : 'N/A' }}</td>
+            </tr>
+          </ng-container>
+          <ng-template #noData>
+            <tr>
+              <td colspan="3" class="text-center">No data available</td>
+            </tr>
+          </ng-template>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light border-gray" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
+
+<ng-template #hotelAddEdit let-modal>
+  <div class="modal-header pt-3 pb-3">
+    <h5 class="modal-title">{{hotelHeading}} Hotel </h5>
+    <button type="button" class="btn-close border-0" aria-label="Close"
+      (click)="modal.dismiss('Cross click');resetHotelForm()"></button>
+  </div>
+  <div class="modal-body h-500">
+    <form [formGroup]="hotelForm">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row w-100">
+            <!-- Hotel ID Field: Only visible in Edit Mode -->
+            <div class="col-md-6 " *ngIf="hotelHeading === 'Edit'">
+              <div class="form-group focused">
+                <label class="form-control-label" for="hotelid">Hotel ID<small class="text-danger">*</small></label>
+                <input type="text" id="hotelid" class="form-control" placeholder="Enter hotel ID"
+                  formControlName="hotelId" maxlength="21" />
+                <div class="text-danger">
+                  <small
+                    *ngIf="hotelForm.controls['hotelId'].touched && hotelForm.controls['hotelId'].errors?.['required']">
+                    Hotel ID is required.
+                  </small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hotel Rating Field -->
+            <!-- class="pe-md-0" -->
+            <div class="pe-md-0" [class.col-md-6]="hotelHeading === 'Edit'" [class.col-md-12]="hotelHeading === 'Add'">
+              <div class="form-group focused">
+                <label class="form-control-label" for="name">Hotel Rating<small class="text-danger">*</small></label>
+                <select class="form-control" formControlName="rating">
+                  <option [ngValue]="null">Select hotel rating</option>
+                  <option value="1">1 Star</option>
+                  <option value="2">2 Star</option>
+                  <option value="3">3 Star</option>
+                  <option value="4">4 Star</option>
+                  <option value="5">5 Star</option>
+                </select>
+                <div class="text-danger">
+                  <small
+                    *ngIf="hotelForm.controls['rating'].touched && hotelForm.controls['rating'].errors?.['required']">
+                    Hotel rating is required.
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="row m-0 w-100">
+            <div class="col-md-12 ps-md-0">
+              <div class="form-group focused">
+                <label class="form-control-label" for="name">Hotel name<small class="text-danger">*</small></label>
+                <input type="text" id="name" class="form-control" placeholder="Enter hotel name"
+                  formControlName="hotelName" maxlength="51" />
+                <!-- Hotel Name -->
+                <div class="text-danger">
+                  <small
+                    *ngIf="hotelForm.controls['hotelName'].touched && hotelForm.controls['hotelName'].errors?.['required']">
+                    Hotel name is required.
+                  </small>
+                  <small
+                    *ngIf="hotelForm.controls['hotelName'].touched && hotelForm.controls['hotelName'].errors?.['minlength']">
+                    Hotel name must be at least 3 characters long.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 ps-md-0">
+              <div class="form-group focused">
+                <label class="form-control-label" for="contracted-rate">Contracted Rate<small
+                    class="text-danger">*</small></label>
+                <select id="contracted-rate" class="form-control" formControlName="contractedRate"
+                  (change)="contractedRateOnChange()">
+                  <option [ngValue]="null">Select contracted rate</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+                <!-- Contracted Rate -->
+                <div class="text-danger">
+                  <small
+                    *ngIf="hotelForm.controls['contractedRate'].touched && hotelForm.controls['contractedRate'].errors?.['required']">
+                    Contracted rate is required.
+                  </small>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group focused">
+                <label class="form-control-label" for="contract-rate">Contract Rate</label>
+                <input type="number" id="contract-rate" class="form-control" placeholder="Enter contract rate"
+                  formControlName="contractRate" maxlength="21" appTwoDigitDecimaNumber/>
+                <!-- Contract Rate -->
+                <!-- <div class="text-danger">
+                  <small
+                    *ngIf="hotelForm.controls['contractRate'].touched && hotelForm.controls['contractRate'].errors?.['required']">
+                    Contract rate is required.
+                  </small>
+                  <small
+                    *ngIf="hotelForm.controls['contractRate'].touched && hotelForm.controls['contractRate'].errors?.['min']">
+                    Contract rate must be at least 0.
+                  </small>
+                </div> -->
+              </div>
+            </div>
+          </div>
+
+          <div class="row m-0 w-100">
+            <div class="col-md-6 ps-md-0">
+              <div class="form-group focused">
+                <label class="form-control-label" for="telephone">Telephone<small class="text-danger">*</small></label>
+                <input type="text" id="telephone" class="form-control" placeholder="+351 XXX XXX XXX"
+                  formControlName="telephone" (input)="phoneNumberChange($event)" maxlength="21" />
+                <!-- Telephone -->
+                <div class="text-danger">
+                  <small
+                    *ngIf="hotelForm.controls['telephone'].touched && hotelForm.controls['telephone'].errors?.['required']">
+                    Telephone is required.
+                  </small>
+
+                  <small
+                    *ngIf="hotelForm.controls['telephone'].touched && hotelForm.controls['telephone'].errors?.['pattern']">
+                    Telephone must be in the format "+351 XXX XXX XXX".
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group focused">
+                <label class="form-control-label" for="email">Email<small class="text-danger">*</small></label>
+                <input type="email" id="email" class="form-control" placeholder="Enter email address"
+                  formControlName="email" maxlength="51" />
+                <!-- Email -->
+                <div class="text-danger">
+                  <small
+                    *ngIf="hotelForm.controls['email'].touched && hotelForm.controls['email'].errors?.['required']">
+                    Email is required.
+                  </small>
+                  <small *ngIf="hotelForm.controls['email'].touched && hotelForm.controls['email'].errors?.['email']">
+                    Enter a valid email address.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8 ps-md-0">
+              <div class="form-group focused">
+                <label class="form-control-label" for="address">Address<small class="text-danger">*</small></label>
+                <input type="text" id="address" class="form-control" placeholder="Enter hotel address"
+                  formControlName="address" maxlength="100" />
+                <!-- Address -->
+                <div class="text-danger">
+                  <small
+                    *ngIf="hotelForm.controls['address'].touched && hotelForm.controls['address'].errors?.['required']">
+                    Address is required.
+                  </small>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 ps-md-0">
+              <div class="form-group focused">
+                <label class="form-control-label" for="address">Port<small class="text-danger">*</small></label>
+                <select id="time-period" class="form-control ng-untouched ng-pristine ng-valid" formControlName="port">
+                  <option [ngValue]="null">Select Port</option>
+                  <option *ngFor="let data of getAllPortsData" [value]="data.portid">{{ data.portcode }}</option>
+                </select>
+                <!-- Address -->
+                <div class="text-danger">
+                  <small *ngIf="hotelForm.controls['port'].touched && hotelForm.controls['port'].errors?.['required']">
+                    Port is required.
+                  </small>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 ps-md-0">
+              <div class="form-group focused">
+                <label class="form-control-label" for="address">City<small class="text-danger">*</small></label>
+                <input type="text" id="address" class="form-control" placeholder="Enter city" formControlName="city"
+                  maxlength="21" />
+                <!-- City -->
+                <div class="text-danger">
+                  <small *ngIf="hotelForm.controls['city'].touched && hotelForm.controls['city'].errors?.['required']">
+                    City is required.
+                  </small>
+                  <small *ngIf="hotelForm.controls['city'].touched && hotelForm.controls['city'].errors?.['pattern']">
+                    City must only contain alphabets, spaces, or hyphens.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 ">
+              <div class="form-group focused">
+                <label class="form-control-label" for="address">Country<small class="text-danger">*</small></label>
+                <input type="text" id="address" class="form-control" placeholder="Enter country"
+                  formControlName="country" maxlength="21" />
+                <!-- Country -->
+                <div class="text-danger">
+                  <small
+                    *ngIf="hotelForm.controls['country'].touched && hotelForm.controls['country'].errors?.['required']">
+                    Country is required.
+                  </small>
+                  <small
+                    *ngIf="hotelForm.controls['country'].touched && hotelForm.controls['country'].errors?.['pattern']">
+                    Country must only contain alphabets, spaces, or hyphens.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 ">
+              <div class="form-group focused">
+                <label class="form-control-label" for="address">Post code<small class="text-danger">*</small></label>
+                <input type="text" id="address" class="form-control" placeholder="XXXX-XXX" formControlName="postCode"
+                  maxlength="21" (input)="postCodeChange($event)" />
+                <div class="text-danger">
+                  <small
+                    *ngIf="hotelForm.controls['postCode'].touched && hotelForm.controls['postCode'].errors?.['required']">
+                    Post code is required.
+                  </small>
+                  <small
+                    *ngIf="hotelForm.controls['postCode'].touched && hotelForm.controls['postCode'].errors?.['pattern']">
+                    Post code must be in the format XXXX-XXX.
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row w-100 m-0">
+            <div class="col-md-4 ps-md-0">
+              <div class="form-group focused">
+                <label class="form-control-label" for="currency">Currency<small class="text-danger">*</small></label>
+                <select id="currency" class="form-control" formControlName="currency">
+                  <option [ngValue]="null">Select currency</option>
+                  <!-- <option value="USD">USD</option> -->
+                  <option value="EUR">EUR</option>
+                  <!-- <option value="GBP">GBP</option> -->
+                  <!-- <option value="INR">INR</option> -->
+                  <!-- <option value="AUD">AUD</option> -->
+                </select>
+                <div class="text-danger">
+                  <small
+                    *ngIf="hotelForm.controls['currency'].touched && hotelForm.controls['currency'].errors?.['required']">
+                    Currency is required.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group focused">
+                <label class="form-control-label" for="total-rooms">Total of Rooms<small
+                    class="text-danger">*</small></label>
+                <input type="number" id="total-rooms" class="form-control" placeholder="Enter total number of rooms"
+                  formControlName="totalRooms" maxlength="21" />
+                <div class="text-danger">
+                  <small
+                    *ngIf="hotelForm.controls['totalRooms'].touched && hotelForm.controls['totalRooms'].errors?.['required']">
+                    Total rooms is required.
+                  </small>
+                  <small
+                    *ngIf="hotelForm.controls['totalRooms'].touched && hotelForm.controls['totalRooms'].errors?.['min']">
+                    Total rooms must be at least 1.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group focused">
+                <label class="form-control-label" for="restaurant">Restaurant<small
+                    class="text-danger">*</small></label>
+                <select id="restaurant" class="form-control" formControlName="restaurant"
+                  (change)="restaurantOnChange()">
+                  <option [ngValue]="null">Select restaurant</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+                <div class="text-danger">
+                  <small
+                    *ngIf="hotelForm.controls['restaurant'].touched && hotelForm.controls['restaurant'].errors?.['required']">
+                    Restaurant selection is required.
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h6 class="f-18">Main Contact</h6>
+          <div class="row w-100 m-0 border-b mb-2">
+            <div class="col-md-6 ps-md-0">
+              <div class="form-group focused">
+                <label class="form-control-label" for="main-contact-person">Main Contact Person<small
+                    class="text-danger">*</small></label>
+                <input type="text" id="main-contact-person" class="form-control"
+                  placeholder="Enter main contact person name" formControlName="mainContactPerson" maxlength="51" />
+                <div class="text-danger">
+                  <small
+                    *ngIf="hotelForm.controls['mainContactPerson'].touched && hotelForm.controls['mainContactPerson'].errors?.['required']">
+                    Main contact person is required.
+                  </small>
+                </div>
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label" for="main-contact-email">Main Contact Person Email<small
+                    class="text-danger">*</small></label>
+                <input type="email" id="main-contact-email" class="form-control"
+                  placeholder="Enter main contact person email" formControlName="mainContactEmail" maxlength="51" />
+                <!-- Main Contact Email -->
+                <div class="text-danger">
+                  <small
+                    *ngIf="hotelForm.controls['mainContactEmail'].touched && hotelForm.controls['mainContactEmail'].errors?.['required']">
+                    Main contact email is required.
+                  </small>
+                  <small
+                    *ngIf="hotelForm.controls['mainContactEmail'].touched && hotelForm.controls['mainContactEmail'].errors?.['email']">
+                    Enter a valid email address.
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h6 class="f-18">Finance Contact</h6>
+          <div class="row m-0 w-100 border-b mb-2">
+            <div class="col-md-6 ps-md-0">
+              <div class="form-group focused">
+                <label class="form-control-label" for="finance-person">Finance Person<small
+                    class="text-danger">*</small></label>
+                <input type="text" id="finance-person" class="form-control" placeholder="Enter finance person name"
+                  formControlName="financePerson" maxlength="51" />
+                <!-- Finance Person -->
+                <div class="text-danger">
+                  <small
+                    *ngIf="hotelForm.controls['financePerson'].touched && hotelForm.controls['financePerson'].errors?.['required']">
+                    Finance person is required.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 ps-md-0">
+              <div class="form-group focused">
+                <label class="form-control-label" for="finance-email">Finance Person Email<small
+                    class="text-danger">*</small></label>
+                <input type="email" id="finance-email" class="form-control" placeholder="Enter finance person email"
+                  formControlName="financeEmail" maxlength="51" />
+                <!-- Finance Email -->
+                <div class="text-danger">
+                  <small
+                    *ngIf="hotelForm.controls['financeEmail'].touched && hotelForm.controls['financeEmail'].errors?.['required']">
+                    Finance email is required.
+                  </small>
+                  <small
+                    *ngIf="hotelForm.controls['financeEmail'].touched && hotelForm.controls['financeEmail'].errors?.['email']">
+                    Enter a valid email address.
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h6 class="f-18">Allowances</h6>
+          <div class="row w-100 m-0">
+            <div class="col-md-6 ps-md-0">
+              <div class="form-group focused">
+                <label class="form-control-label" for="pet-friendly">Pet Friendly<small
+                    class="text-danger">*</small></label>
+                <select id="pet-friendly" class="form-control" formControlName="petFriendly"
+                  (change)="petFriendlyOnChange()">
+                  <option [ngValue]="null">Select Pet Friendly</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+                <!-- Pet Friendly -->
+                <div class="text-danger">
+                  <small
+                    *ngIf="hotelForm.controls['petFriendly'].touched && hotelForm.controls['petFriendly'].errors?.['required']">
+                    Pet friendly selection is required.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group focused">
+                <label class="form-control-label" for="pet-allowance">Pet Allowance (Rate)</label>
+                <input type="number" id="pet-allowance" class="form-control" placeholder="Enter pet allowance rate"
+                  formControlName="petAllowance" maxlength="21" appTwoDigitDecimaNumber />
+                <!-- Pet Allowance -->
+                <!-- <div class="text-danger">
+                  <small
+                    *ngIf="hotelForm.controls['petAllowance'].touched && hotelForm.controls['petAllowance'].errors?.['required']">
+                    Pet allowance is required.
+                  </small>
+                  <small
+                    *ngIf="hotelForm.controls['petAllowance'].touched && hotelForm.controls['petAllowance'].errors?.['min']">
+                    Pet allowance must be at least 0.
+                  </small>
+                </div> -->
+              </div>
+            </div>
+            <div class="col-md-6 ps-md-0">
+              <div class="form-group focused">
+                <label class="form-control-label" for="dinner-rate">Dinner Rate</label>
+                <input type="number" id="dinner-rate" class="form-control" placeholder="Enter dinner rate"
+                  formControlName="dinnerRate" maxlength="21" appTwoDigitDecimaNumber />
+                <!-- Dinner Rate -->
+                <!-- <div class="text-danger">
+                  <small
+                    *ngIf="hotelForm.controls['dinnerRate'].touched && hotelForm.controls['dinnerRate'].errors?.['required']">
+                    Dinner rate is required.
+                  </small>
+                  <small
+                    *ngIf="hotelForm.controls['dinnerRate'].touched && hotelForm.controls['dinnerRate'].errors?.['min']">
+                    Dinner rate must be at least 0.
+                  </small>
+                </div> -->
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group focused">
+                <label class="form-control-label" for="breakfast-rate">Breakfast Rate<small
+                    class="text-danger">*</small></label>
+                <input type="number" id="breakfast-rate" class="form-control" placeholder="Enter breakfast rate"
+                  formControlName="breakfastRate" maxlength="21" appTwoDigitDecimaNumber />
+                <!-- Breakfast Rate -->
+                <div class="text-danger">
+                  <small
+                    *ngIf="hotelForm.controls['breakfastRate'].touched && hotelForm.controls['breakfastRate'].errors?.['required']">
+                    Breakfast rate is required.
+                  </small>
+                  <!-- <small
+                    *ngIf="hotelForm.controls['breakfastRate'].touched && hotelForm.controls['breakfastRate'].errors?.['min']">
+                    Breakfast rate must be at least 0.
+                  </small> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- Closing div for modal-body -->
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light border-gray"
+      (click)="modal.close('Close click');resetHotelForm()">Close</button>
+    <button class="btn btn-primary" *ngIf="hotelHeading=='Add'" (click)="handleAddHotelSaveBtn()">
+      <span *ngIf="!isAddHotelSaving">Save</span>
+      <span *ngIf="isAddHotelSaving">Saving..</span>
+      <span *ngIf="isAddHotelSaving" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    </button>
+    <button class="btn btn-primary" *ngIf="hotelHeading=='Edit'" (click)="handleEditHotelSaveBtn()">
+      <span *ngIf="!isEditHotelSaving">Save</span>
+      <span *ngIf="isEditHotelSaving">Updating..</span>
+      <span *ngIf="isEditHotelSaving" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #hotelnoteedit let-modal>
+  <div class="modal-header pt-3 pb-3">
+    <h5 class="modal-title">Edit Note</h5>
+    <button type="button" class="btn-close border-0" aria-label="Close"
+      (click)="modal.dismiss('Cross click');handleHotelEditNotesMsgFormFormReset();"></button>
+  </div>
+  <div class="modal-body">
+    <div class="row" [formGroup]="hotelEditNotesMsgForm">
+      <div class="col-md-12">
+        <div class="form-group focused">
+          <label class="form-control-label" for="rooms">Note<small class="text-danger">*</small></label>
+          <textarea name="" id="" class="form-control" row="3" placeholder="" formControlName="message"
+            maxlength="200"></textarea>
+          <div class="text-danger">
+            <small
+              *ngIf="hotelEditNotesMsgForm.controls['message'].touched && hotelEditNotesMsgForm.controls['message'].errors?.['required']">
+              Note is required.
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light border-gray"
+      (click)="modal.close('Close click');handleHotelEditNotesMsgFormFormReset()">Close</button>
+    <button class="btn btn-primary" (click)="handleEditNoteSave()">
+      <span *ngIf="!isHotelEditNoteSaving">Save</span>
+      <span *ngIf="isHotelEditNoteSaving">Updating..</span>
+      <span *ngIf="isHotelEditNoteSaving" class="spinner-border spinner-border-sm" role="status"
+        aria-hidden="true"></span>
+    </button>
+  </div>
+</ng-template>
+
+
+<ng-template #conformationBox let-modal>
+  <div class="modal-body text-center">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="form-group mt-3">
+          <h2><i class="feather icon-alert-circle h1"></i></h2>
+          <h5 class="modal-title"> Are you sure you want to {{hotelStatusHeading || 'N/A'}}?</h5>
+        </div>
+        <div class="form-group d-flex gap-2 justify-content-center">
+          <button class="btn btn-primary" (click)="handleHotelUpdateStatusYes()"  >Yes</button>
+          <button type="button" class="btn btn-light border-gray" (click)="modal.close('Close click');">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

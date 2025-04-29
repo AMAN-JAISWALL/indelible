@@ -1,0 +1,36 @@
+<nav class="navbar navbar pcoded-header navbar-expand-lg navbar-light header-blue headerPos-fixed">
+    <div class="container m-auto d-flex justify-content-start">
+        <div class="logo d-flex justify-content-start">
+            <img src="/assets/images/text-logo.svg" alt="Logo">
+          </div>
+          <input type="checkbox" id="toggle-menu">
+          <label for="toggle-menu" class="menu-icon">&#9776;</label>
+          <ul class="nav-links d-flex justify-content-center">
+              <li><a routerLink="/website/register" routerLinkActive="active">Home </a></li>
+              <li><a routerLink="" routerLinkActive="active">Shop </a></li>
+            <li><a routerLink="/website/itemCategory" routerLinkActive="active">Category</a></li>
+            <li class="dropdown">
+              <a href="#">Services</a>
+              <ul class="nav-dropdown-menu">
+                <li><a href="#">Web Development</a></li>
+                <li><a href="#">App Development</a></li>
+                <li><a href="#">SEO Services</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Contact</a></li>
+            
+            
+            <li class="buttons">
+              <a href="javascript:void(0)" routerLink="/website/register">
+              <i class="feather icon-shopping-cart text-dark fs-18"></i>
+              </a>
+              <a href="javascript:void(0)">
+                <i class="feather icon-user text-dark fs-18"></i>
+                </a>
+              <!-- <button class="login-btn"><i class="feather icon-shopping-cart"></i> Add to Cart</button>
+              <button class="signup-btn">Become a Dealer</button> -->
+            </li>
+          </ul>
+    </div>
+    
+  </nav>

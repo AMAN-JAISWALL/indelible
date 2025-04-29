@@ -1,0 +1,39 @@
+ stages: 
+  - build 
+
+ci_job:
+  stage:
+    build
+
+  before_script:
+    # - echo "process start - $(date +%Y-%m-%d_%H-%M-%S)" 
+    # - source ~/.nvm/nvm.sh
+    # - nvm --version 
+    # - nvm use 14
+    # - npm -v
+    # #- npm cache clean --force
+    # - npm install
+    # #- npm install socket.io-client
+    # - npm install ngx-socket-io@3.4.0
+    # - echo "process end - $(date +%Y-%m-%d_%H-%M-%S)"
+
+
+  tags:
+    - ci 
+ 
+  only:
+    - main 
+
+  script:
+    - echo "process start - $(date +%Y-%m-%d_%H-%M-%S)"  
+ 
+    # - npm run build --prod -- --base-href= /2757_JubWeMet/
+
+    # - node --max_old_space_size=1000096 node_modules/@angular/cli/bin/ng build --base-href /jwm/
+
+    # - rm -r ./dist/browser/assets
+
+    # - lftp -e "open demoprojects.itsabacus.net; user jub_we_met_front Abacus@2018;set ftp:ssl-allow off;rm -r ./;mirror --reverse -Rnev ./dist/app/ ./ --ignore-time --parallel=10;"
+
+    # - lftp -e "open demoprojects.itsabacus.net; user jub_we_met_front Abacus@2018;set ftp:ssl-allow off;put ./.htaccess ./ --ignore-time;ls -al;bye;"
+    - echo "process end - $(date +%Y-%m-%d_%H-%M-%S)" 

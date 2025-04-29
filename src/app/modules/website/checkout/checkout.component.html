@@ -1,0 +1,491 @@
+<section class="feature_product_area section_gap_bottom_custom mb-25">
+  <div class="container-fluid py-3 px-md-5 px-2">
+    <div class="d-flex justify-content-between align-items-center m-b-10">
+      <h5 class="ng-star-inserted">Hotels</h5>
+      <div class="d-flex gap-2 align-items-center">
+        <button (click)="openAddHotel(addhotel)" type="button" class="btn btn-primary px-3">
+          <i class="feather icon-plus"></i>
+          Add Hotel
+        </button>
+        <button (click)="openSendEmail(sendemail)" type="button" class="btn btn-primary px-3">
+          <i class="feather icon-arrow-up-right"></i>
+          Send Email
+        </button>
+      </div>
+    </div>
+    <div class="card p-3">
+      <div class="d-flex flex-sm-row flex-column justify-content-between align-items-center mb-2">
+        <div class="d-flex justify-content-center align-items-center">
+          <p class="mb-0">Show</p>
+          <select class="form-control wid-80 mx-2">
+            <option value="">10</option>
+            <option value="">25</option>
+            <option value="">50</option>
+            <option value="">100</option>
+          </select>
+          <p class="mb-0">entries</p>
+        </div>
+        <div class="d-flex gap-2 mobile mt-2 mt-md-0">
+          <div class="form-group mb-md-0 w-100 d-flex align-items-center gap-1">
+            <div class="form-group mb-md-0 w-100 d-flex align-items-center gap-1">
+              <label for="time-period" class="text-nowrap m-0">Hotel Name</label>
+              <input type="text" placeholder=" Enter hotel name" class="form-control" />
+            </div>
+            <label for="time-period" class="text-nowrap m-0">Port</label>
+            <select id="time-period" class="form-control ng-untouched ng-pristine ng-valid" ng-reflect-model="daily">
+              <option value="daily" ng-reflect-value="daily">JFK</option>
+              <option value="weekly" ng-reflect-value="weekly">LAX</option>
+              <option value="monthly" ng-reflect-value="monthly">ORD</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table white-space">
+          <thead>
+            <tr>
+              <th scope="col">
+                <div class="">
+                  <input class="form-check-input" type="checkbox" />
+                </div>
+              </th>
+              <th scope="col">Hotel Name</th>
+              <th scope="col">Price</th>
+              <th scope="col">Address</th>
+              <th scope="col">Total Rooms</th>
+              <th scope="col">Telephone No.</th>
+              <th scope="col">Email</th>
+              <th scope="col">Availability</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <div class="">
+                <input class="form-check-input" type="checkbox" />
+              </div>
+              <th scope="row">Grand Hotel Sunshine</th>
+              <td>$200/night</td>
+              <td>123 Main Street, City</td>
+              <td>100</td>
+              <td>(555) 123-4567</td>
+              <td>hiltonexample.com</td>
+              <td> <span class="badge badge-success h-fit">Available <i class="feather icon-edit"></i></span></td>
+              <td>
+                <div ngbDropdown container="body">
+                  <button type="button" class="btn btn-sm border-0 text-dark" ngbDropdownToggle>
+                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                  </button>
+                  <div ngbDropdownMenu>
+                    <button ngbDropdownItem>
+                      <i class="feather icon-edit"></i>
+                      Edit
+                    </button>
+                    <button ngbDropdownItem>
+                      <i class="feather icon-trash-2"></i>
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <div class="">
+                <input class="form-check-input" type="checkbox" />
+              </div>
+              <th scope="row">Sunshine Paradise Hotel</th>
+              <td>$250/night</td>
+              <td>456 Elm Street, City</td>
+              <td>150</td>
+              <td>(555) 987-6543</td>
+              <td>marriottexample.com</td>
+              <td><span class="badge badge-primary h-fit">Not Available</span></td>
+              <td>
+                <div ngbDropdown container="body">
+                  <button type="button" class="btn btn-sm border-0 text-dark" ngbDropdownToggle>
+                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                  </button>
+                  <div ngbDropdownMenu>
+                    <button ngbDropdownItem>
+                      <i class="feather icon-edit"></i>
+                      Edit
+                    </button>
+                    <button ngbDropdownItem>
+                      <i class="feather icon-trash-2"></i>
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <div class="">
+                <input class="form-check-input" type="checkbox" />
+              </div>
+              <th scope="row">Hotel vinnci porto</th>
+              <td>$180/night</td>
+              <td>789 Pine Avenue, City</td>
+              <td>120</td>
+              <td>(555) 234-5678</td>
+              <td>hyattexample.com</td>
+              <td> <span class="badge badge-success h-fit">Available <i class="feather icon-edit"></i></span></td>
+              <td>
+                <div ngbDropdown container="body">
+                  <button type="button" class="btn btn-sm border-0 text-dark" ngbDropdownToggle>
+                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                  </button>
+                  <div ngbDropdownMenu>
+                    <button ngbDropdownItem>
+                      <i class="feather icon-edit"></i>
+                      Edit
+                    </button>
+                    <button ngbDropdownItem>
+                      <i class="feather icon-trash-2"></i>
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <div class="">
+                <input class="form-check-input" type="checkbox" />
+              </div>
+              <th scope="row">Hilton garden Inn evora</th>
+              <td>$180/night</td>
+              <td>789 Pine Avenue, City</td>
+              <td>120</td>
+              <td>(555) 234-5678</td>
+              <td>hyattexample.com</td>
+              <td> <span class="badge badge-success h-fit">Available <i class="feather icon-edit"></i></span></td>
+              <td>
+                <div ngbDropdown container="body">
+                  <button type="button" class="btn btn-sm border-0 text-dark" ngbDropdownToggle>
+                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                  </button>
+                  <div ngbDropdownMenu>
+                    <button ngbDropdownItem>
+                      <i class="feather icon-edit"></i>
+                      Edit
+                    </button>
+                    <button ngbDropdownItem>
+                      <i class="feather icon-trash-2"></i>
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <div class="">
+                <input class="form-check-input" type="checkbox" />
+              </div>
+              <th scope="row">Lisbon five stars 8 building hotel </th>
+              <td>$180/night</td>
+              <td>789 Pine Avenue, City</td>
+              <td>120</td>
+              <td>(555) 234-5678</td>
+              <td>hyattexample.com</td>
+              <td> <span class="badge badge-primary h-fit">Not Available <i class="feather icon-edit"></i></span></td>
+              <td>
+                <div ngbDropdown container="body">
+                  <button type="button" class="btn btn-sm border-0 text-dark" ngbDropdownToggle>
+                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                  </button>
+                  <div ngbDropdownMenu>
+                    <button ngbDropdownItem>
+                      <i class="feather icon-edit"></i>
+                      Edit
+                    </button>
+                    <button ngbDropdownItem>
+                      <i class="feather icon-trash-2"></i>
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <div class="">
+                <input class="form-check-input" type="checkbox" />
+              </div>
+              <th scope="row">Golden Sands Resort</th>
+              <td>$180/night</td>
+              <td>789 Pine Avenue, City</td>
+              <td>120</td>
+              <td>(555) 234-5678</td>
+              <td>hyattexample.com</td>
+              <td> <span class="badge badge-success h-fit">Available <i class="feather icon-edit"></i></span></td>
+              <td>
+                <div ngbDropdown container="body">
+                  <button type="button" class="btn btn-sm border-0 text-dark" ngbDropdownToggle>
+                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                  </button>
+                  <div ngbDropdownMenu>
+                    <button ngbDropdownItem>
+                      <i class="feather icon-edit"></i>
+                      Edit
+                    </button>
+                    <button ngbDropdownItem>
+                      <i class="feather icon-trash-2"></i>
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <div class="">
+                <input class="form-check-input" type="checkbox" />
+              </div>
+              <th scope="row">Golden Sands Resort</th>
+              <td>$180/night</td>
+              <td>789 Pine Avenue, City</td>
+              <td>120</td>
+              <td>(555) 234-5678</td>
+              <td>hyattexample.com</td>
+              <td> <span class="badge badge-success h-fit">Available <i class="feather icon-edit"></i></span></td>
+              <td>
+                <div ngbDropdown container="body">
+                  <button type="button" class="btn btn-sm border-0 text-dark" ngbDropdownToggle>
+                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                  </button>
+                  <div ngbDropdownMenu>
+                    <button ngbDropdownItem>
+                      <i class="feather icon-edit"></i>
+                      Edit
+                    </button>
+                    <button ngbDropdownItem>
+                      <i class="feather icon-trash-2"></i>
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <div class="">
+                <input class="form-check-input" type="checkbox" />
+              </div>
+              <th scope="row">Green Valley Suites</th>
+              <td>$300/night</td>
+              <td>101 Ocean Drive, City</td>
+              <td>200</td>
+              <td>(555) 678-1234</td>
+              <td>ritz-carltonexample.com</td>
+              <td> <span class="badge badge-primary h-fit">Not Available <i class="feather icon-edit"></i></span></td>
+              <td>
+                <div ngbDropdown container="body">
+                  <button type="button" class="btn btn-sm border-0 text-dark" ngbDropdownToggle>
+                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                  </button>
+                  <div ngbDropdownMenu>
+                    <button ngbDropdownItem>
+                      <i class="feather icon-edit"></i>
+                      Edit
+                    </button>
+                    <button ngbDropdownItem>
+                      <i class="feather icon-trash-2"></i>
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="d-flex flex-sm-row flex-column justify-content-between align-items-center mt-1">
+        <p class="mb-2 mt-1 mb-md-0 mt-md-0">Showing 1 to 10 of 57 entries</p>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination mb-0">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link active" href="javascript:void(0)">1</a></li>
+            <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
+            <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #addhotel let-modal>
+  <div class="modal-header pt-3 pb-3">
+    <h5 class="modal-title">Add Hotel</h5>
+    <button type="button" class="btn-close border-0" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body h-430">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="name">Name</label>
+          <input type="text" id="name" class="form-control" placeholder="Enter hotel name" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="address">Address</label>
+          <input type="text" id="address" class="form-control" placeholder="Enter hotel address" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="telephone">Telephone</label>
+          <input type="text" id="telephone" class="form-control" placeholder="Enter telephone number" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="email">Email</label>
+          <input type="email" id="email" class="form-control" placeholder="Enter email address" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="contracted-rate">Contracted Rate</label>
+          <select id="contracted-rate" class="form-control">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="contract-rate">Contract Rate</label>
+          <input type="number" id="contract-rate" class="form-control" placeholder="Enter contract rate" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="main-contact-person">Main Contact Person</label>
+          <input type="text" id="main-contact-person" class="form-control"
+            placeholder="Enter main contact person name" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="main-contact-email">Main Contact Person Email</label>
+          <input type="email" id="main-contact-email" class="form-control"
+            placeholder="Enter main contact person email" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="finance-person">Finance Person</label>
+          <input type="text" id="finance-person" class="form-control" placeholder="Enter finance person name" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="finance-email">Finance Person Email</label>
+          <input type="email" id="finance-email" class="form-control" placeholder="Enter finance person email" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="currency">Currency</label>
+          <select id="currency" class="form-control">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="INR">INR</option>
+            <option value="AUD">AUD</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="total-rooms">Total of Rooms</label>
+          <input type="number" id="total-rooms" class="form-control" placeholder="Enter total number of rooms" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="stars">Stars</label>
+          <input type="number" id="stars" class="form-control" placeholder="Enter hotel stars" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="pet-friendly">Pet Friendly</label>
+          <select id="pet-friendly" class="form-control">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="pet-allowance">Pet Allowance (Rate)</label>
+          <input type="number" id="pet-allowance" class="form-control" placeholder="Enter pet allowance rate" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="restaurant">Restaurant</label>
+          <select id="restaurant" class="form-control">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="dinner-rate">Dinner Rate</label>
+          <input type="number" id="dinner-rate" class="form-control" placeholder="Enter dinner rate" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group focused">
+          <label class="form-control-label" for="breakfast-rate">Breakfast Rate</label>
+          <input type="number" id="breakfast-rate" class="form-control" placeholder="Enter breakfast rate" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light border-gray" (click)="modal.close('Close click')">Close</button>
+    <button class="btn btn-primary">Save</button>
+  </div>
+</ng-template>
+<ng-template #sendemail let-modal>
+  <div class="modal-header pt-3 pb-3">
+    <h5 class="modal-title">List of Templates</h5>
+    <button type="button" class="btn-close border-0" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <h6>1.Hotel Availability Template</h6>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light border-gray" (click)="modal.close('Close click')">Close</button>
+    <button class="btn btn-primary">Save</button>
+  </div>
+</ng-template>
